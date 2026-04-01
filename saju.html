@@ -1374,6 +1374,19 @@ document.addEventListener('DOMContentLoaded',function(){
   const pw=document.getElementById('loginPw');
   if(pw){pw.addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});}
 });
+// URL 파라미터로 받은 analysis JSON으로 {{변수}} 교체
+const params = new URLSearchParams(window.location.search);
+const analysisStr = params.get('analysis');
+if(analysisStr){
+  try{
+    const data = JSON.parse(decodeURIComponent(analysisStr));
+    let html = document.body.innerHTML;
+    Object.keys(data).forEach(key => {
+      html = html.split('{{'+key+'}}').join(data[key]||'');
+    });
+    document.body.innerHTML = html;
+  }catch(e){ console.log('analysis parse error', e); }
+}
 </script>
 </body>
 </html>
