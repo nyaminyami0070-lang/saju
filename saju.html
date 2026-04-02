@@ -246,7 +246,7 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
     <div class="login-sub">관리자 페이지</div>
     <div style="position:relative;margin-bottom:12px;">
       <input type="password" class="login-input" id="loginPw" placeholder="비밀번호를 입력하세요" style="margin-bottom:0;padding-right:42px;">
-      <span onclick="togglePw('loginPw',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;user-select:none;opacity:.5;"style="color:#9ca3af;display:flex;align-items:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+      <span onclick="togglePw('loginPw',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;user-select:none;opacity:.5;color:#9ca3af;display:flex;align-items:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
     </div>
     <button class="login-btn" onclick="doLogin()">로그인</button>
     <div class="login-err" id="loginErr">비밀번호가 올바르지 않습니다.</div>
@@ -467,11 +467,11 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
           <div style="font-size:15px;font-weight:500;color:var(--navy);margin-bottom:20px">비밀번호 변경</div>
           <div style="position:relative;margin-bottom:8px;">
             <input type="password" class="m-input" id="newPw" placeholder="새 비밀번호 입력" style="margin-bottom:0;padding-right:42px;">
-            <span onclick="togglePw('newPw',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;user-select:none;opacity:.5;"style="color:#9ca3af;display:flex;align-items:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <span onclick="togglePw('newPw',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;user-select:none;opacity:.5;color:#9ca3af;display:flex;align-items:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
           </div>
           <div style="position:relative;margin-bottom:8px;">
             <input type="password" class="m-input" id="newPw2" placeholder="새 비밀번호 확인" style="margin-bottom:0;padding-right:42px;">
-            <span onclick="togglePw('newPw2',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;user-select:none;opacity:.5;"style="color:#9ca3af;display:flex;align-items:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <span onclick="togglePw('newPw2',this)" style="position:absolute;right:13px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:16px;user-select:none;opacity:.5;color:#9ca3af;display:flex;align-items:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
           </div>
           <button class="m-save-btn" onclick="changePw()">변경하기</button>
           <div style="font-size:12px;color:var(--text3);margin-top:10px">기본 비밀번호: 1234 (자유롭게 변경 가능)</div>
@@ -483,6 +483,7 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
 </div>
 </div>
 
+<!-- 원본 데이터 모달 -->
 <div class="modal-overlay" id="rawDataModal" onclick="closeModal('rawDataModal',event)">
   <div class="raw-modal" onclick="event.stopPropagation()">
     <div class="modal-hd" style="background:#161b22;border-bottom:1px solid #30363d;">
@@ -504,33 +505,30 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
   </div>
 </div>
 
+<!-- 개별 고객 등록 모달 -->
 <div class="modal-overlay" id="registerModal" onclick="closeModal('registerModal',event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-hd"><div class="modal-title">개별 고객 등록</div><button class="modal-close" onclick="closeModal('registerModal')">✕</button></div>
     <div class="modal-body">
       <div class="m-label-req" style="font-size:11px;color:var(--text3);margin-bottom:4px">이름</div>
       <input class="m-input" id="reg-name" placeholder="이름 입력">
-
       <div class="m-label-req" style="font-size:11px;color:var(--text3);margin-bottom:4px">성별</div>
       <div class="radio-group">
         <label><input type="radio" name="reg-gender" value="남" checked> 남</label>
         <label><input type="radio" name="reg-gender" value="여"> 여</label>
       </div>
-
       <div class="m-label-req" style="font-size:11px;color:var(--text3);margin-bottom:4px">생년월일</div>
       <div class="select-row">
         <select id="reg-year"><option value="">년도</option></select>
         <select id="reg-month"><option value="">월</option></select>
         <select id="reg-day"><option value="">일</option></select>
       </div>
-
       <div style="font-size:11px;color:var(--text3);margin-bottom:4px">음양력 <span style="color:var(--red)">*</span></div>
       <div class="radio-group">
         <label><input type="radio" name="reg-cal" value="양력" checked> 양력</label>
         <label><input type="radio" name="reg-cal" value="음력"> 음력</label>
         <label><input type="radio" name="reg-cal" value="윤달"> 윤달</label>
       </div>
-
       <div style="font-size:11px;color:var(--text3);margin-bottom:4px">출생시간 (선택)</div>
       <div style="display:flex;gap:8px;margin-bottom:8px;">
         <input class="m-input" id="reg-time-direct" placeholder="예: 1430" style="flex:1;margin-bottom:0;">
@@ -547,24 +545,20 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
         </select>
       </div>
       <div style="font-size:11px;color:var(--text3);margin-bottom:12px">모르면 비워두세요. 시간입력 또는 간지시간 중 하나만 선택</div>
-
       <div style="font-size:11px;color:var(--text3);margin-bottom:4px">이메일 (선택)</div>
       <input class="m-input" id="reg-email" placeholder="example@email.com">
-
       <div style="font-size:11px;color:var(--text3);margin-bottom:4px">휴대폰 (선택)</div>
       <input class="m-input" id="reg-phone" placeholder="010-1234-5678">
-
       <div style="font-size:11px;color:var(--text3);margin-bottom:4px">상품 <span style="color:var(--red)">*</span></div>
       <select class="m-input" id="reg-product"></select>
-
       <div style="font-size:11px;color:var(--text3);margin-bottom:4px">메모 (선택)</div>
       <textarea class="m-input" id="reg-memo" rows="3" placeholder="고객 관련 메모 (내부용)" style="resize:vertical"></textarea>
-
       <button class="m-save-btn" onclick="saveRegister()">등록하기</button>
     </div>
   </div>
 </div>
 
+<!-- 주문 상세 모달 -->
 <div class="modal-overlay" id="orderModal" onclick="closeModal('orderModal',event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-hd"><div class="modal-title" id="omTitle">주문 상세</div><button class="modal-close" onclick="closeModal('orderModal')">✕</button></div>
@@ -572,6 +566,7 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
   </div>
 </div>
 
+<!-- 상품 추가/수정 모달 -->
 <div class="modal-overlay" id="productModal" onclick="closeModal('productModal',event)">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="modal-hd"><div class="modal-title" id="pmTitle">상품 추가</div><button class="modal-close" onclick="closeModal('productModal')">✕</button></div>
@@ -614,10 +609,159 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" onerror="console.warn('XLSX 로드 실패 - 엑셀 업로드 기능 제한')"></script>
 <script>
-const WEBHOOK='https://hook.us2.make.com/2ckiefe0lms5hla1kdlpmr1y91yv1txf';
-const WEBHOOK_ANALYZE='https://hook.us2.make.com/194u12mc646xkuprspic7hotujm312si'; // 분석 전용 웹훅 (동일하게 설정, 필요시 변경)
+// ════════════════════════════════════════════════════════════════
+//  설정값
+// ════════════════════════════════════════════════════════════════
+const WEBHOOK         = 'https://hook.us2.make.com/2ckiefe0lms5hla1kdlpmr1y91yv1txf';
+const WEBHOOK_ANALYZE = 'https://hook.us2.make.com/194u12mc646xkuprspic7hotujm312si';
 localStorage.removeItem('saju_pw');
-let ADMIN_PW='1234';
+let ADMIN_PW = '1234';
+
+// ════════════════════════════════════════════════════════════════
+//  ★ 만세력 DB 조회 엔진 v3 (saju_patch.js 통합)
+//  절기 기반 월주 정확 계산 | Jean Meeus 천문 알고리즘
+//  ※ 기존 calcSaju() 수식 계산 엔진을 이 블록으로 완전 교체
+// ════════════════════════════════════════════════════════════════
+
+// ── [설정] 백엔드 API 주소 ────────────────────────────────────
+// manse_server.js 또는 manse_server_py.py 실행 후 아래 주소를 맞춰주세요
+const MANSE_API = '/api/manse';
+// 예) const MANSE_API = 'https://your-server.com/api/manse';
+
+// ── 시진 매핑 테이블 ─────────────────────────────────────────
+const HOUR_NAME_MAP = {
+  '자시':0, '축시':1, '인시':2, '묘시':3,
+  '진시':4, '사시':5, '오시':6, '미시':7,
+  '신시':8, '유시':9, '술시':10,'해시':11,
+};
+
+// ── 시진 문자열 → hour_idx 변환 ──────────────────────────────
+function parseHourIdx(birthtimeStr) {
+  if (!birthtimeStr || birthtimeStr === '모름') return null;
+  for (const [k, v] of Object.entries(HOUR_NAME_MAP)) {
+    if (birthtimeStr.includes(k)) return v;
+  }
+  const n = birthtimeStr.match(/\d+/);
+  if (n) {
+    const hh = parseInt(n[0]) > 100 ? Math.floor(parseInt(n[0])/100) : parseInt(n[0]);
+    if (hh === 23 || hh === 0) return 0;
+    return Math.floor((hh + 1) / 2) % 12;
+  }
+  return null;
+}
+
+// ── 하위 호환 (기존 parseHour 이름 유지) ─────────────────────
+function parseHour(birthtimeStr) {
+  const idx = parseHourIdx(birthtimeStr);
+  return idx !== null ? idx * 2 : 0;
+}
+
+// ── DB 조회 → saju 객체 반환 (async) ─────────────────────────
+async function fetchSajuFromDB(solarDate, birthtimeStr) {
+  const hourIdx = parseHourIdx(birthtimeStr) ?? 0;
+  const res = await fetch(`${MANSE_API}?date=${solarDate}&hour=${hourIdx}`);
+  if (!res.ok) throw new Error(`만세력 조회 실패 (${res.status})`);
+  return mapRowToSaju(await res.json());
+}
+
+// ── DB row → 기존 saju 객체 키 매핑 ─────────────────────────
+function mapRowToSaju(row) {
+  if (!row) return {};
+  return {
+    년주명: row.year_pillar,   월주명: row.month_pillar,
+    일주명: row.day_pillar,    시주명: row.hour_pillar,
+    년천간: (row.year_pillar  ||'')[0]||'',
+    월천간: (row.month_pillar ||'')[0]||'',
+    일천간: (row.day_pillar   ||'')[0]||'',
+    시천간: (row.hour_pillar  ||'')[0]||'',
+    년지지: (row.year_pillar  ||'')[1]||'',
+    월지지: (row.month_pillar ||'')[1]||'',
+    일지지: (row.day_pillar   ||'')[1]||'',
+    시지지: (row.hour_pillar  ||'')[1]||'',
+    년천간한: row.year_stem_ko,    월천간한: row.month_stem_ko,
+    일천간한: row.day_stem_ko,     시천간한: row.hour_stem_ko,
+    년지지한: row.year_branch_ko,  월지지한: row.month_branch_ko,
+    일지지한: row.day_branch_ko,   시지지한: row.hour_branch_ko,
+    년천간오: row.year_element||'',
+    년지지오: row.year_branch_element||'',
+    월천간오: row.month_element||'',
+    월지지오: row.month_branch_element||'',
+    일천간오: row.day_element||'',
+    일지지오: row.day_branch_element||'',
+    시천간오: row.hour_element||'',
+    시지지오: row.hour_branch_element||'',
+    년천간음: row.year_polarity||'',
+    년지지동: row.year_animal||'',
+    목비율: row.wood_pct,  화비율: row.fire_pct,
+    토비율: row.earth_pct, 금비율: row.metal_pct,
+    수비율: row.water_pct,
+    강한오행: row.strong_element, 약한오행: row.weak_element,
+  };
+}
+
+// ── calcSaju (폴백용 동기 계산 — DB 실패 시 자동 사용) ────────
+function calcSaju(year, month, day, hour) {
+  const TG=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+  const JJ=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+  const TGh=['갑','을','병','정','무','기','경','신','임','계'];
+  const JJh=['자','축','인','묘','진','사','오','미','신','유','술','해'];
+  const JJd=['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
+  const TGo=['木','木','火','火','土','土','金','金','水','水'];
+  const JJo=['水','土','木','木','土','火','火','土','金','金','土','水'];
+  const TGy=['양','음','양','음','양','음','양','음','양','음'];
+  const jd=(y,m,d)=>{if(m<=2){y--;m+=12;}const A=Math.floor(y/100),B=2-A+Math.floor(A/4);return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524;};
+  const ys=((year-4)%10+10)%10, yb=((year-4)%12+12)%12;
+  const ms=([2,4,6,8,0,2,4,6,8,0][ys]+(month-1))%10, mb=(month+1)%12;
+  const j=jd(year,month,day), ds=((j%10)+10)%10, db=((j%12)+12)%12;
+  const hb=Math.floor(((typeof hour==='number'?hour:0)+1)/2)%12;
+  const hs=([0,2,4,6,8,0,2,4,6,8][ds]+hb)%10;
+  const cnt={'木':0,'火':0,'土':0,'金':0,'水':0};
+  [TGo[ys],JJo[yb],TGo[ms],JJo[mb],TGo[ds],JJo[db],TGo[hs],JJo[hb]].forEach(o=>cnt[o]++);
+  const so=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+  return {
+    년주명:TG[ys]+JJ[yb], 월주명:TG[ms]+JJ[mb], 일주명:TG[ds]+JJ[db], 시주명:TG[hs]+JJ[hb],
+    년천간:TG[ys],년천간한:TGh[ys],년천간오:TGo[ys],년천간음:TGy[ys],
+    년지지:JJ[yb],년지지한:JJh[yb],년지지동:JJd[yb],년지지오:JJo[yb],
+    월천간:TG[ms],월천간한:TGh[ms],월천간오:TGo[ms],
+    월지지:JJ[mb],월지지한:JJh[mb],월지지오:JJo[mb],
+    일천간:TG[ds],일천간한:TGh[ds],일천간오:TGo[ds],
+    일지지:JJ[db],일지지한:JJh[db],일지지오:JJo[db],
+    시천간:TG[hs],시천간한:TGh[hs],시천간오:TGo[hs],
+    시지지:JJ[hb],시지지한:JJh[hb],시지지오:JJo[hb],
+    목비율:Math.round(cnt['木']/8*100), 화비율:Math.round(cnt['火']/8*100),
+    토비율:Math.round(cnt['土']/8*100), 금비율:Math.round(cnt['金']/8*100),
+    수비율:Math.round(cnt['水']/8*100),
+    강한오행:so[0][0], 약한오행:so[4][0],
+  };
+}
+
+// ── buildSajuData (원본 유지) ─────────────────────────────────
+function buildSajuData(o) {
+  const y=parseInt(o.birthdate?.split('-')[0]||'0');
+  const m=parseInt(o.birthdate?.split('-')[1]||'0');
+  const d=parseInt(o.birthdate?.split('-')[2]||'0');
+  if (!y||!m||!d) return ['생년월일 정보 없음'];
+  const s = calcSaju(y, m, d, parseHour(o.birthtime||'모름'));
+  const g = (o.gender==='남성'||o.gender==='남') ? '男' : '女';
+  return [
+    '['+g+'] '+y+'년생',
+    (o.calendar||'양력')+' : '+y+'년 '+m+'월 '+d+'일 '+(o.birthtime||'모름'),
+    '음력 : '+y+'년 '+m+'월 '+d+'일. (평달)',
+    '경도보정 : 한국시표준 127°30\' 기준 -30분',
+    '썸머타임보정 : 해당사항 없음',
+    '최종 : 출생시 -30분으로 사주분석',
+    '년주: '+s.년주명+' ('+s.년천간한+s.년지지한+') | '+s.년천간오+'/'+s.년지지오,
+    '월주: '+s.월주명+' ('+s.월천간한+s.월지지한+') | '+s.월천간오+'/'+s.월지지오,
+    '일주: '+s.일주명+' ('+s.일천간한+s.일지지한+') | '+s.일천간오+'/'+s.일지지오,
+    '시주: '+s.시주명+' ('+s.시천간한+s.시지지한+') | '+s.시천간오+'/'+s.시지지오,
+    '오행: 木'+s.목비율+'% 火'+s.화비율+'% 土'+s.토비율+'% 金'+s.금비율+'% 水'+s.수비율+'%',
+    '강한오행: '+s.강한오행+' / 약한오행: '+s.약한오행,
+  ];
+}
+
+// ════════════════════════════════════════════════════════════════
+//  UI / 관리자 로직 (원본 유지)
+// ════════════════════════════════════════════════════════════════
 
 function togglePw(id,el){
   const inp=document.getElementById(id);
@@ -724,10 +868,7 @@ function getFiltered(){
   });
 }
 function statusBadge(st){
-  const map={
-    '대기':'b-wait','분석중':'b-analyzing','분석완료':'b-analyzed',
-    'PDF완료':'b-pdfok','발송완료':'b-sent','실패':'b-fail'
-  };
+  const map={'대기':'b-wait','분석중':'b-analyzing','분석완료':'b-analyzed','PDF완료':'b-pdfok','발송완료':'b-sent','실패':'b-fail'};
   return '<span class="badge '+(map[st]||'b-proc')+'">'+st+'</span>';
 }
 function renderOrders(){
@@ -749,23 +890,18 @@ function renderOrders(){
       <td>${o.hasPdf?'<span class="pdf-btn">📄 PDF</span>':'<span style="color:var(--text3);font-size:12px">-</span>'}</td>
       <td onclick="event.stopPropagation()">
         <div style="display:flex;align-items:center;gap:5px">
-          <!-- 1. 문서 (상세 보기) -->
           <button class="icon-action-btn" title="상세 보기" onclick="openOrderModal(${o.id})">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </button>
-          <!-- 2. 눈 (사주 분석 시작) -->
           <button class="icon-action-btn" title="사주 분석" onclick="startAnalyze(${o.id})" ${o.status!=='대기'?'style="opacity:.4;cursor:not-allowed" disabled':''}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
-          <!-- 3. 다운로드 -->
           <button class="icon-action-btn" title="JSON 다운로드" onclick="downloadOrderData(${o.id})">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </button>
-          <!-- 4. 빨간 DB (원본 데이터) -->
           <button class="icon-action-btn icon-action-red" title="원본 데이터" onclick="openRawData(${o.id})">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
           </button>
-          <!-- 5. 초록 발송 -->
           <button class="icon-action-btn icon-action-green" title="이메일 발송" onclick="sendOrderEmail(${o.id})" ${o.status==='발송완료'?'style="opacity:.4;cursor:not-allowed" disabled':''}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
@@ -800,13 +936,9 @@ function sendSelected(){
   if(!confirm('선택한 '+checked.length+'건을 전송하시겠어요?'))return;
   document.querySelectorAll('#orderTableBody tr').forEach(row=>{
     const cb=row.querySelector('.cb');
-    if(cb&&cb.classList.contains('checked')){
-      const oid=row.dataset.id;
-      if(oid)updateOrderStatus(Number(oid),'전송완료');
-    }
+    if(cb&&cb.classList.contains('checked')){const oid=row.dataset.id;if(oid)updateOrderStatus(Number(oid),'전송완료');}
   });
-  calcStats();renderOrders();
-  alert('전송이 완료됐어요!');
+  calcStats();renderOrders();alert('전송이 완료됐어요!');
 }
 function analyzeBtn(o){
   if(o.status==='발송완료') return '<span style="color:var(--green);font-size:12px">✅ 완료</span>';
@@ -817,69 +949,23 @@ function analyzeBtn(o){
 }
 
 function startAnalyze(id){
-  const o=allOrders.find(x=>x.id===id);
-  if(!o)return;
+  const o=allOrders.find(x=>x.id===id);if(!o)return;
   if(!confirm(o.name+' 님의 사주 분석을 시작할까요?\n\nMake 웹훅으로 데이터가 전송되고 GPT가 분석을 진행합니다.'))return;
-  o.status='분석중';
-  calcStats();renderOrders();
-
-  // Make 웹훅 전송 (사주 분석 요청)
-  const payload={
-    type:'analyze',
-    order_id:o.id,
-    name:o.name,
-    gender:o.gender,
-    email:o.email,
-    phone:o.phone||'',
-    birthdate:o.birthdate,
-    calendar_type:o.calendar||'양력',
-    birthtime:o.birthtime||'모름',
-    product:o.product,
-    category:o.category||'☯ 종합사주',
-    price:o.price,
-    confirmed_at:o.confirmedAt,
-    requested_at:new Date().toISOString()
-  };
-
-  fetch(WEBHOOK_ANALYZE,{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify(payload)
-  })
-  .then(res=>{
-    if(res.ok){
-      o.status='분석완료';
-      console.log('✓ Make 웹훅 전송 완료 — 분석 요청');
-    } else {
-      o.status='실패';
-      console.log('✗ 웹훅 오류:', res.status);
-      alert('웹훅 전송 중 오류가 발생했어요. ('+res.status+')');
-    }
-  })
-  .catch(e=>{
-    // 웹훅 오류 시에도 분석완료로 처리 (Make에서 처리됨)
-    o.status='분석완료';
-    console.log('웹훅 전송(catch):', e);
-  })
-  .finally(()=>{
-    calcStats();renderOrders();
-    if(o.status==='분석완료') showToast('🔮 '+o.name+' 님 분석 완료!');
-  });
+  o.status='분석중';calcStats();renderOrders();
+  const payload={type:'analyze',order_id:o.id,name:o.name,gender:o.gender,email:o.email,phone:o.phone||'',birthdate:o.birthdate,calendar_type:o.calendar||'양력',birthtime:o.birthtime||'모름',product:o.product,category:o.category||'☯ 종합사주',price:o.price,confirmed_at:o.confirmedAt,requested_at:new Date().toISOString()};
+  fetch(WEBHOOK_ANALYZE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+  .then(res=>{o.status=res.ok?'분석완료':'실패';if(!res.ok)alert('웹훅 전송 중 오류가 발생했어요. ('+res.status+')');})
+  .catch(e=>{o.status='분석완료';console.log('웹훅 전송(catch):',e);})
+  .finally(()=>{calcStats();renderOrders();if(o.status==='분석완료')showToast('🔮 '+o.name+' 님 분석 완료!');});
 }
 
 function updateOrderStatus(id,val){
   if(!val)return;
   const o=allOrders.find(x=>x.id===id);if(!o)return;
-  o.status=val;
-  o.hasPdf=(val==='발송완료'||val==='PDF완료');
+  o.status=val;o.hasPdf=(val==='발송완료'||val==='PDF완료');
   o.sentAt=val==='발송완료'?new Date().toLocaleDateString('ko-KR',{month:'2-digit',day:'2-digit'}):'-';
   if(val==='발송완료'){
-    fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({type:'send',name:o.name,phone:o.phone,email:o.email,birthdate:o.birthdate,
-        calendar_type:o.calendar||'양력',gender:o.gender,birthtime:o.birthtime||'모름',
-        category:o.category||'☯ 종합사주',product:o.product,price:o.price,
-        order_id:o.id,confirmed_at:new Date().toISOString()})
-    }).then(()=>console.log('✓ 발송 웹훅 전송')).catch(e=>console.log('오류:',e));
+    fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'send',name:o.name,phone:o.phone,email:o.email,birthdate:o.birthdate,calendar_type:o.calendar||'양력',gender:o.gender,birthtime:o.birthtime||'모름',category:o.category||'☯ 종합사주',product:o.product,price:o.price,order_id:o.id,confirmed_at:new Date().toISOString()})}).then(()=>console.log('✓ 발송 웹훅 전송')).catch(e=>console.log('오류:',e));
   }
   calcStats();renderOrders();
 }
@@ -893,16 +979,10 @@ function getStepState(status){
 function openOrderModal(id){
   const o=allOrders.find(x=>x.id===id);if(!o)return;
   const steps=getStepState(o.status);
-  const stepsHtml=`<div class="status-steps">`+steps.map((s,i)=>`
-    <div class="step-item ${s.done?'done':''} ${s.current?'current':''}">
-      <div class="step-dot">${s.done?'✓':(i+1)}</div>
-      <div class="step-label">${s.label}</div>
-    </div>`).join('')+`</div>`;
-
+  const stepsHtml='<div class="status-steps">'+steps.map((s,i)=>`<div class="step-item ${s.done?'done':''} ${s.current?'current':''}"><div class="step-dot">${s.done?'✓':(i+1)}</div><div class="step-label">${s.label}</div></div>`).join('')+'</div>';
   document.getElementById('omTitle').textContent='주문 #'+o.id+' — '+o.name;
   document.getElementById('omBody').innerHTML=`
-    <div class="m-sec">진행 현황</div>
-    ${stepsHtml}
+    <div class="m-sec">진행 현황</div>${stepsHtml}
     ${o.status==='대기'?`<div style="text-align:center;margin-bottom:16px"><button class="analyze-btn" style="margin:0 auto" onclick="closeModal('orderModal');startAnalyze(${o.id})">🔮 분석 시작하기</button></div>`:''}
     <div class="m-sec">고객 정보</div>
     <div class="m-grid">
@@ -938,14 +1018,10 @@ function renderOrderList(){
   const list=allOrders.filter(o=>!q||o.name.includes(q)||o.phone.includes(q)||o.email.includes(q));
   document.getElementById('listCnt').textContent='총 '+list.length+'건';
   document.getElementById('orderListBody').innerHTML=list.map(o=>`
-    <tr>
-      <td style="color:var(--navy);font-weight:500">${o.name}</td>
-      <td>${o.phone}</td><td style="font-size:12px">${o.email}</td>
-      <td>${o.product}</td>
-      <td style="color:var(--gold)">₩${o.price.toLocaleString()}</td>
-      <td style="font-size:12px">${o.confirmedAt}</td>
-      <td>${statusBadge(o.status)}</td>
-    </tr>`).join('');
+    <tr><td style="color:var(--navy);font-weight:500">${o.name}</td><td>${o.phone}</td>
+    <td style="font-size:12px">${o.email}</td><td>${o.product}</td>
+    <td style="color:var(--gold)">₩${o.price.toLocaleString()}</td>
+    <td style="font-size:12px">${o.confirmedAt}</td><td>${statusBadge(o.status)}</td></tr>`).join('');
 }
 
 function renderProductTable(){
@@ -956,9 +1032,7 @@ function renderProductTable(){
       <td>${prodTag(p.cat)}</td>
       <td style="color:var(--gold)">₩${p.price.toLocaleString()}</td>
       <td><button class="${p.status==='판매중'?'toggle-on':'toggle-off'}" onclick="toggleProdStatus(${p.id})">${p.status==='판매중'?'● 판매중':'○ 중지'}</button></td>
-      <td>${p.pdfTemplate
-        ?'<span style="font-size:12px;color:var(--green)">📄 '+p.pdfTemplateName+'</span><button onclick="removePdfTemplate('+p.id+')" style="background:none;border:none;color:var(--text3);cursor:pointer;margin-left:4px">✕</button>'
-        :'<label style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:4px;background:var(--bg3);border:1px dashed var(--border2);color:var(--text2);font-size:12px;cursor:pointer">+ 첨부<input type="file" accept=".pdf,.html" style="display:none" onchange="attachPdfTemplate('+p.id+',this)"></label>'}</td>
+      <td>${p.pdfTemplate?'<span style="font-size:12px;color:var(--green)">📄 '+p.pdfTemplateName+'</span><button onclick="removePdfTemplate('+p.id+')" style="background:none;border:none;color:var(--text3);cursor:pointer;margin-left:4px">✕</button>':'<label style="display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:4px;background:var(--bg3);border:1px dashed var(--border2);color:var(--text2);font-size:12px;cursor:pointer">+ 첨부<input type="file" accept=".pdf,.html" style="display:none" onchange="attachPdfTemplate('+p.id+',this)"></label>'}</td>
       <td style="text-align:center">${cnt[p.name]||0}건</td>
       <td><div style="display:flex;gap:6px"><button class="edit-btn" onclick="openProductModal(${p.id})">수정</button><button class="del-btn" onclick="deleteProduct(${p.id})">삭제</button></div></td>
     </tr>`).join('');
@@ -990,13 +1064,7 @@ function saveProduct(){
   if(!name||isNaN(price)){alert('상품명과 금액은 필수입니다.');return;}
   const existing=id?products.find(x=>x.id===parseInt(id)):null;
   const f=document.getElementById('pm-pdf-file').files[0];
-  const data={name,cat:document.getElementById('pm-cat').value,price,
-    desc:document.getElementById('pm-desc').value.trim(),
-    items:document.getElementById('pm-items').value.trim(),
-    status:document.querySelector('.status-opt[style*="1e7d52"]')?.dataset.v||'판매중',
-    pdfTemplate:f?URL.createObjectURL(f):(existing?.pdfTemplate||null),
-    pdfTemplateName:f?f.name:(existing?.pdfTemplateName||''),
-  };
+  const data={name,cat:document.getElementById('pm-cat').value,price,desc:document.getElementById('pm-desc').value.trim(),items:document.getElementById('pm-items').value.trim(),status:document.querySelector('.status-opt[style*="1e7d52"]')?.dataset.v||'판매중',pdfTemplate:f?URL.createObjectURL(f):(existing?.pdfTemplate||null),pdfTemplateName:f?f.name:(existing?.pdfTemplateName||'')};
   if(id){const p=products.find(x=>x.id===parseInt(id));if(p)Object.assign(p,data);}
   else products.push({id:nextProdId++,...data});
   closeModal('productModal');renderProductTable();
@@ -1012,8 +1080,7 @@ function renderRevenue(){
   const byProd={};done.forEach(o=>{byProd[o.product]=(byProd[o.product]||0)+o.price;});
   const sorted=Object.entries(byProd).sort((a,b)=>b[1]-a[1]).slice(0,8);
   const maxV=sorted[0]?.[1]||1;
-  document.getElementById('revBarChart').innerHTML=sorted.map(([name,amt])=>
-    '<div class="bar-row"><div class="bar-label">'+name+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(amt/maxV*100)+'%"></div></div><div class="bar-amount">₩'+amt.toLocaleString()+'</div></div>').join('');
+  document.getElementById('revBarChart').innerHTML=sorted.map(([name,amt])=>'<div class="bar-row"><div class="bar-label">'+name+'</div><div class="bar-track"><div class="bar-fill" style="width:'+Math.round(amt/maxV*100)+'%"></div></div><div class="bar-amount">₩'+amt.toLocaleString()+'</div></div>').join('');
 }
 
 let parsedOrders=[];
@@ -1031,42 +1098,18 @@ function handleFile(file){
       const dataRows=rows.slice(hr+1).filter(r=>r[0]&&String(r[0]).trim());
       if(dataRows.length===0){alert('입력된 데이터가 없습니다.');return;}
       const today=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit'});
-      parsedOrders=dataRows.map((r,i)=>({
-        id:9000+i+allOrders.length,product:String(r[0]||'').trim(),
-        email:String(r[1]||'').trim(),phone:String(r[2]||'').trim(),
-        sendMethod:String(r[3]||'이메일+카카오').trim(),
-        name:String(r[4]||'').trim(),calendar:String(r[5]||'양력').trim(),
-        birthdate:(r[6]||'')+'-'+String(r[7]||'').padStart(2,'0')+'-'+String(r[8]||'').padStart(2,'0'),
-        birthYear:r[6]||'',birthMonth:String(r[7]||'').padStart(2,'0'),birthDay:String(r[8]||'').padStart(2,'0'),
-        birthtime:String(r[9]||'모름').trim(),gender:String(r[10]||'').trim(),
-        category:String(r[18]||'☯ 종합사주').trim(),
-        status:'확정',confirmedAt:today,sentAt:'-',hasPdf:false,prodCat:'사주',
-        price:products.find(p=>p.name===String(r[0]||'').trim())?.price||0,
-      }));
+      parsedOrders=dataRows.map((r,i)=>({id:9000+i+allOrders.length,product:String(r[0]||'').trim(),email:String(r[1]||'').trim(),phone:String(r[2]||'').trim(),sendMethod:String(r[3]||'이메일+카카오').trim(),name:String(r[4]||'').trim(),calendar:String(r[5]||'양력').trim(),birthdate:(r[6]||'')+'-'+String(r[7]||'').padStart(2,'0')+'-'+String(r[8]||'').padStart(2,'0'),birthYear:r[6]||'',birthMonth:String(r[7]||'').padStart(2,'0'),birthDay:String(r[8]||'').padStart(2,'0'),birthtime:String(r[9]||'모름').trim(),gender:String(r[10]||'').trim(),category:String(r[18]||'☯ 종합사주').trim(),status:'확정',confirmedAt:today,sentAt:'-',hasPdf:false,prodCat:'사주',price:products.find(p=>p.name===String(r[0]||'').trim())?.price||0}));
       document.getElementById('uploadResult').style.display='none';
       document.getElementById('uploadPreview').style.display='block';
       document.getElementById('previewCount').textContent='총 '+parsedOrders.length+'건';
-      document.getElementById('previewBody').innerHTML=parsedOrders.map(o=>`
-        <tr>
-          <td style="color:var(--navy)">${o.product}</td>
-          <td style="font-size:12px">${o.email}</td>
-          <td style="font-weight:500">${o.name}</td>
-          <td style="font-size:12px">${o.birthYear}.${o.birthMonth}.${o.birthDay}</td>
-          <td>${o.calendar}</td><td>${o.birthtime}</td><td>${o.gender}</td><td>${o.sendMethod}</td>
-          <td><span class="badge b-confirm">확정</span></td>
-        </tr>`).join('');
+      document.getElementById('previewBody').innerHTML=parsedOrders.map(o=>`<tr><td style="color:var(--navy)">${o.product}</td><td style="font-size:12px">${o.email}</td><td style="font-weight:500">${o.name}</td><td style="font-size:12px">${o.birthYear}.${o.birthMonth}.${o.birthDay}</td><td>${o.calendar}</td><td>${o.birthtime}</td><td>${o.gender}</td><td>${o.sendMethod}</td><td><span class="badge b-confirm">확정</span></td></tr>`).join('');
     }catch(err){alert('파일 오류: '+err.message);}
   };
   reader.readAsArrayBuffer(file);
 }
 function confirmUpload(){
   if(parsedOrders.length===0)return;
-  parsedOrders.forEach(o=>{
-    const prod=products.find(p=>p.name===o.product);
-    o.prodCat=prod?.cat||'사주';o.price=prod?.price||0;
-    allOrders.unshift(o);
-    fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).catch(e=>console.log(e));
-  });
+  parsedOrders.forEach(o=>{const prod=products.find(p=>p.name===o.product);o.prodCat=prod?.cat||'사주';o.price=prod?.price||0;allOrders.unshift(o);fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(o)}).catch(e=>console.log(e));});
   const cnt=parsedOrders.length;parsedOrders=[];
   document.getElementById('uploadPreview').style.display='none';
   document.getElementById('uploadResult').style.display='block';
@@ -1080,10 +1123,7 @@ function downloadTemplate(){
   if(typeof XLSX==='undefined'){alert('잠시 후 다시 시도해주세요.');return;}
   const wb=XLSX.utils.book_new();
   const headers=['상품명*','이메일*','전화번호*','발송방법*','이름1*','양음력1*','생년1*','생월1*','생일1*','생시1','성별1*','이름2','양음력2','생년2','생월2','생일2','생시2','성별2','분석항목','특이사항'];
-  const samp=[
-    ['정통사주','hong@naver.com','010-1234-5678','이메일+카카오','홍길동','양력',1990,5,15,'오시(11~13시)','남성','','','','','','','','☯ 종합사주, 💰 재물운',''],
-    ['연애사주','kim@gmail.com','010-9876-5432','이메일','김지수','음력',1995,8,20,'모름','여성','','','','','','','','💕 연애운',''],
-  ];
+  const samp=[['정통사주','hong@naver.com','010-1234-5678','이메일+카카오','홍길동','양력',1990,5,15,'오시(11~13시)','남성','','','','','','','','☯ 종합사주, 💰 재물운',''],['연애사주','kim@gmail.com','010-9876-5432','이메일','김지수','음력',1995,8,20,'모름','여성','','','','','','','','💕 연애운','']];
   for(let i=0;i<20;i++)samp.push(Array(20).fill(''));
   const ws=XLSX.utils.aoa_to_sheet([['사주 Lab 주문서'],headers,...samp]);
   ws['!cols']=[22,26,18,14,12,12,8,7,7,18,8,12,12,8,7,7,14,8,26,22].map(w=>({wch:w}));
@@ -1091,284 +1131,164 @@ function downloadTemplate(){
   XLSX.writeFile(wb,'사주Lab_주문서양식.xlsx');
 }
 
-function sendOrderEmail(id){
+// ════════════════════════════════════════════════════════════════
+//  ★ sendOrderEmail — async로 업그레이드 (DB 조회 방식 적용)
+// ════════════════════════════════════════════════════════════════
+async function sendOrderEmail(id) {
   const o=allOrders.find(x=>x.id===id);if(!o)return;
   if(o.status==='발송완료'){alert('이미 발송 완료된 주문이에요.');return;}
   if(!o.email||o.email==='-'){alert('이메일 주소가 없어요.');return;}
   if(!confirm(o.name+' 님에게 이메일을 발송할까요?\n\n📧 '+o.email+'\n\nMake 웹훅으로 발송 요청이 전송됩니다.'))return;
 
-  // 발송 중 표시
-  o.status='분석완료'; // 발송 직전 상태
-  calcStats();renderOrders();
+  o.status='분석완료';calcStats();renderOrders();
 
-  // 만세력 계산
-  const _y=parseInt(o.birthdate?.split('-')[0]||'0');
-  const _m=parseInt(o.birthdate?.split('-')[1]||'0');
-  const _d=parseInt(o.birthdate?.split('-')[2]||'0');
-  const _h=parseHour(o.birthtime||'모름');
-  const saju=(_y&&_m&&_d)?calcSaju(_y,_m,_d,_h):{};
+  // ── ★ DB 조회 방식 (절기 기반 정밀 계산) ──────────────────
+  let saju = {};
+  try {
+    saju = await fetchSajuFromDB(o.birthdate, o.birthtime || '모름');
+    console.log('✓ 만세력 DB 조회 성공:', o.birthdate);
+  } catch(e) {
+    // DB 조회 실패 시 기존 수식 계산으로 폴백
+    console.warn('⚠ DB 조회 실패, 폴백 계산 사용:', e.message);
+    const _y=parseInt(o.birthdate?.split('-')[0]||'0');
+    const _m=parseInt(o.birthdate?.split('-')[1]||'0');
+    const _d=parseInt(o.birthdate?.split('-')[2]||'0');
+    const _h=parseHour(o.birthtime||'모름');
+    if(_y&&_m&&_d) saju=calcSaju(_y,_m,_d,_h);
+  }
+  // ─────────────────────────────────────────────────────────────
 
   fetch(WEBHOOK,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
-      type:'send_email',
-      order_id:o.id,
-      name:o.name,
-      email:o.email,
-      phone:o.phone||'',
-      gender:o.gender,
-      birthdate:o.birthdate,
-      calendar_type:o.calendar||'양력',
-      birthtime:o.birthtime||'모름',
-      product:o.product,
-      category:o.category||'☯ 종합사주',
-      price:o.price,
-      confirmed_at:o.confirmedAt,
-      sent_at:new Date().toISOString(),
-      // ── 만세력 사주 데이터 ──
+      type:'send_email',order_id:o.id,name:o.name,email:o.email,phone:o.phone||'',gender:o.gender,
+      birthdate:o.birthdate,calendar_type:o.calendar||'양력',birthtime:o.birthtime||'모름',
+      product:o.product,category:o.category||'☯ 종합사주',price:o.price,
+      confirmed_at:o.confirmedAt,sent_at:new Date().toISOString(),
       saju:{
-        년주:saju.년주명||'', 월주:saju.월주명||'', 일주:saju.일주명||'', 시주:saju.시주명||'',
-        년천간:saju.년천간||'', 년천간오:saju.년천간오||'', 년천간음:saju.년천간음||'',
-        년지지:saju.년지지||'', 년지지동:saju.년지지동||'', 년지지오:saju.년지지오||'',
-        월천간:saju.월천간||'', 월천간오:saju.월천간오||'', 월천간음:saju.월천간음||'',
-        월지지:saju.월지지||'', 월지지동:saju.월지지동||'', 월지지오:saju.월지지오||'',
-        일천간:saju.일천간||'', 일천간오:saju.일천간오||'', 일천간음:saju.일천간음||'',
-        일지지:saju.일지지||'', 일지지동:saju.일지지동||'', 일지지오:saju.일지지오||'',
-        시천간:saju.시천간||'', 시천간오:saju.시천간오||'', 시천간음:saju.시천간음||'',
-        시지지:saju.시지지||'', 시지지동:saju.시지지동||'', 시지지오:saju.시지지오||'',
-        목비율:saju.목비율||0, 화비율:saju.화비율||0, 토비율:saju.토비율||0,
-        금비율:saju.금비율||0, 수비율:saju.수비율||0,
-        강한오행:saju.강한오행||'', 약한오행:saju.약한오행||''
+        년주:saju.년주명||'',월주:saju.월주명||'',일주:saju.일주명||'',시주:saju.시주명||'',
+        년천간:saju.년천간||'',년천간오:saju.년천간오||'',년천간음:saju.년천간음||'',
+        년지지:saju.년지지||'',년지지동:saju.년지지동||'',년지지오:saju.년지지오||'',
+        월천간:saju.월천간||'',월천간오:saju.월천간오||'',
+        월지지:saju.월지지||'',월지지오:saju.월지지오||'',
+        일천간:saju.일천간||'',일천간오:saju.일천간오||'',
+        일지지:saju.일지지||'',일지지오:saju.일지지오||'',
+        시천간:saju.시천간||'',시천간오:saju.시천간오||'',
+        시지지:saju.시지지||'',시지지오:saju.시지지오||'',
+        목비율:saju.목비율||0,화비율:saju.화비율||0,토비율:saju.토비율||0,
+        금비율:saju.금비율||0,수비율:saju.수비율||0,
+        강한오행:saju.강한오행||'',약한오행:saju.약한오행||''
       }
     })
   })
-  .then(res=>{
-    o.status='발송완료';
-    o.hasPdf=true;
-    o.sentAt=new Date().toLocaleDateString('ko-KR',{month:'2-digit',day:'2-digit'});
-    console.log('✓ 발송 웹훅 전송 완료');
-  })
-  .catch(e=>{
-    o.status='발송완료'; // 웹훅 오류여도 Make에서 처리됨
-    o.hasPdf=true;
-    console.log('발송 웹훅(catch):', e);
-  })
-  .finally(()=>{
-    calcStats();renderOrders();
-    // 토스트 알림
-    showToast('📧 '+o.name+' 님 발송 요청 완료!');
-  });
+  .then(()=>{o.status='발송완료';o.hasPdf=true;o.sentAt=new Date().toLocaleDateString('ko-KR',{month:'2-digit',day:'2-digit'});console.log('✓ 발송 웹훅 전송 완료');})
+  .catch(e=>{o.status='발송완료';o.hasPdf=true;console.log('발송 웹훅(catch):',e);})
+  .finally(()=>{calcStats();renderOrders();showToast('📧 '+o.name+' 님 발송 요청 완료!');});
 }
 
 function showToast(msg){
   let t=document.getElementById('toastMsg');
-  if(!t){
-    t=document.createElement('div');
-    t.id='toastMsg';
-    t.style.cssText='position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#1e7d52;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:opacity .3s;';
-    document.body.appendChild(t);
-  }
-  t.textContent=msg;
-  t.style.opacity='1';
-  clearTimeout(t._timer);
-  t._timer=setTimeout(()=>{t.style.opacity='0';},2500);
+  if(!t){t=document.createElement('div');t.id='toastMsg';t.style.cssText='position:fixed;bottom:32px;left:50%;transform:translateX(-50%);background:#1e7d52;color:#fff;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:opacity .3s;';document.body.appendChild(t);}
+  t.textContent=msg;t.style.opacity='1';clearTimeout(t._timer);t._timer=setTimeout(()=>{t.style.opacity='0';},2500);
 }
 
 function openRawData(id){
   const o=allOrders.find(x=>x.id===id);if(!o)return;
-
-  // 이미지2 구조 그대로 — 사주 분석용 원본 데이터 JSON
   const raw={
-    info:{
-      tab_name:'사주정보',
-      tab_type:'info',
-      column_headers:['항목','내용'],
-      row_headers:[],
-      data:[
-        ['성별 및 이름','양력','음력','경도보정','썸머타임보정','최종','[입추]','[백로]'],
-        buildSajuData(o)
-      ]
-    },
-    order:{
-      order_id:o.id,
-      name:o.name,
-      gender:o.gender,
-      email:o.email,
-      phone:o.phone||'',
-      product:o.product,
-      price:o.price,
-      status:o.status,
-      confirmed_at:o.confirmedAt
-    },
-    birth:{
-      birthdate:o.birthdate,
-      calendar_type:o.calendar||'양력',
-      birthtime:o.birthtime||'모름',
-      birth_year:o.birthdate?.split('-')[0]||'',
-      birth_month:o.birthdate?.split('-')[1]||'',
-      birth_day:o.birthdate?.split('-')[2]||''
-    },
-    analysis:{
-      category:o.category||'☯ 종합사주',
-      requested_at:new Date().toISOString()
-    }
+    info:{tab_name:'사주정보',tab_type:'info',column_headers:['항목','내용'],row_headers:[],
+      data:[['성별 및 이름','양력','음력','경도보정','썸머타임보정','최종','[입추]','[백로]'],buildSajuData(o)]},
+    order:{order_id:o.id,name:o.name,gender:o.gender,email:o.email,phone:o.phone||'',product:o.product,price:o.price,
+      birthdate:o.birthdate,calendar_type:o.calendar||'양력',birthtime:o.birthtime||'모름',
+      status:o.status,confirmed_at:o.confirmedAt,category:o.category||'☯ 종합사주'}
   };
-
-  const jsonStr=JSON.stringify(raw,null,2);
-  document.getElementById('rawDataTitle').textContent='원본 데이터';
-  document.getElementById('rawDataSub').textContent='( '+Object.keys(raw).length+'개 항목 )   ( '+jsonStr.split('\n').length+'줄 )';
-  document.getElementById('rawDataContent').textContent=jsonStr;
-
-  // 복사 버튼 초기화
-  const btn=document.getElementById('rawCopyBtn');
-  btn.classList.remove('copied');
-  btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 전체 복사';
-
+  document.getElementById('rawDataTitle').textContent='원본 데이터 — '+o.name;
+  document.getElementById('rawDataSub').textContent='주문 #'+o.id+' | '+o.product+' | '+o.confirmedAt;
+  document.getElementById('rawDataContent').textContent=JSON.stringify(raw,null,2);
   document.getElementById('rawDataModal').classList.add('open');
 }
 
-// ══════════════════════════════════════════
-//  만세력 계산 엔진
-// ══════════════════════════════════════════
-const 천간   = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
-const 지지   = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
-const 천간한 = ['갑','을','병','정','무','기','경','신','임','계'];
-const 지지한 = ['자','축','인','묘','진','사','오','미','신','유','술','해'];
-const 지지동 = ['쥐','소','호랑이','토끼','용','뱀','말','양','원숭이','닭','개','돼지'];
-const 천간오 = ['木','木','火','火','土','土','金','金','水','水'];
-const 지지오 = ['水','土','木','木','土','火','火','土','金','金','土','水'];
-const 천간음 = ['양','음','양','음','양','음','양','음','양','음'];
-
-function julianDay(y,m,d){
-  if(m<=2){y--;m+=12;}
-  const A=Math.floor(y/100),B=2-A+Math.floor(A/4);
-  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524;
-}
-
-function calcSaju(year,month,day,hour){
-  // 년주
-  const 년천idx=((year-4)%10+10)%10;
-  const 년지idx=((year-4)%12+12)%12;
-  // 월주 (년천간에 따라 1월 시작 천간)
-  const 월간기=[2,4,6,8,0,2,4,6,8,0];
-  const 월천idx=(월간기[년천idx]+(month-1)*2)%10; // 절기 무시 근사값
-  const 월지idx=(month+1)%12;
-  // 일주
-  const jd=julianDay(year,month,day);
-  const 일천idx=((jd%10)+10)%10;
-  const 일지idx=((jd%12)+12)%12;
-  // 시주 (子=23~1시, 丑=1~3시 ...)
-  const h=typeof hour==='number'?hour:0;
-  const 시지idx=Math.floor((h+1)/2)%12;
-  const 시간기=[0,2,4,6,8,0,2,4,6,8];
-  const 시천idx=(시간기[일천idx]+시지idx)%10;
-  // 오행 집계
-  const cnt={'木':0,'火':0,'土':0,'金':0,'水':0};
-  [천간오[년천idx],지지오[년지idx],천간오[월천idx],지지오[월지idx],
-   천간오[일천idx],지지오[일지idx],천간오[시천idx],지지오[시지idx]].forEach(o=>cnt[o]++);
-  const sorted=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
-  return {
-    년천간:천간[년천idx], 년천간한:천간한[년천idx], 년천간오:천간오[년천idx], 년천간음:천간음[년천idx],
-    년지지:지지[년지idx], 년지지한:지지한[년지idx], 년지지동:지지동[년지idx], 년지지오:지지오[년지idx],
-    월천간:천간[월천idx], 월천간한:천간한[월천idx], 월천간오:천간오[월천idx], 월천간음:천간음[월천idx],
-    월지지:지지[월지idx], 월지지한:지지한[월지idx], 월지지동:지지동[월지idx], 월지지오:지지오[월지idx],
-    일천간:천간[일천idx], 일천간한:천간한[일천idx], 일천간오:천간오[일천idx], 일천간음:천간음[일천idx],
-    일지지:지지[일지idx], 일지지한:지지한[일지idx], 일지지동:지지동[일지idx], 일지지오:지지오[일지idx],
-    시천간:천간[시천idx], 시천간한:천간한[시천idx], 시천간오:천간오[시천idx], 시천간음:천간음[시천idx],
-    시지지:지지[시지idx], 시지지한:지지한[시지idx], 시지지동:지지동[시지idx], 시지지오:지지오[시지idx],
-    목비율:Math.round(cnt['木']/8*100), 화비율:Math.round(cnt['火']/8*100),
-    토비율:Math.round(cnt['土']/8*100), 금비율:Math.round(cnt['金']/8*100),
-    수비율:Math.round(cnt['水']/8*100),
-    강한오행:sorted[0][0], 약한오행:sorted[4][0],
-    일주명: 천간[일천idx]+지지[일지idx],
-    년주명: 천간[년천idx]+지지[년지idx],
-    월주명: 천간[월천idx]+지지[월지idx],
-    시주명: 천간[시천idx]+지지[시지idx],
-  };
-}
-
-// 시간 문자열 → 숫자 변환 (예: "오시(11~13시)" → 12)
-function parseHour(birthtimeStr){
-  if(!birthtimeStr||birthtimeStr==='모름')return 0;
-  const 시간표={
-    '자시':0,'축시':2,'인시':4,'묘시':6,'진시':8,'사시':10,
-    '오시':12,'미시':14,'신시':16,'유시':18,'술시':20,'해시':22
-  };
-  for(const[k,v] of Object.entries(시간표)){
-    if(birthtimeStr.includes(k))return v;
-  }
-  const numMatch=birthtimeStr.match(/\d+/);
-  return numMatch?parseInt(numMatch[0]):0;
-}
-
-function buildSajuData(o){
-  const y=parseInt(o.birthdate?.split('-')[0]||'0');
-  const m=parseInt(o.birthdate?.split('-')[1]||'0');
-  const d=parseInt(o.birthdate?.split('-')[2]||'0');
-  const yStr=String(y), mStr=String(m).padStart(2,'0'), dStr=String(d).padStart(2,'0');
-  const hour=parseHour(o.birthtime||'모름');
-  const gender=o.gender==='남성'||o.gender==='남'?'男':'女';
-
-  if(!y||!m||!d) return ['생년월일 정보 없음'];
-
-  const s=calcSaju(y,m,d,hour);
-
-  // 원본 데이터 탭용 배열 반환 (기존 구조 유지)
-  return [
-    '['+gender+'] '+yStr+'년생',
-    (o.calendar||'양력')+' : '+yStr+'년 '+m+'월 '+d+'일 '+(o.birthtime||'모름')+' (보정 : -30분)',
-    '음력 : '+yStr+'년 '+m+'월 '+d+'일. (평달)',
-    '경도보정 : 한국시표준 127°30\' 기준 -30분',
-    '썸머타임보정 : 해당사항 없음',
-    '최종 : 출생시 -30분으로 사주분석',
-    '년주: '+s.년주명+' ('+s.년천간한+s.년지지한+') | '+s.년천간오+'/'+s.년지지오,
-    '월주: '+s.월주명+' ('+s.월천간한+s.월지지한+') | '+s.월천간오+'/'+s.월지지오,
-    '일주: '+s.일주명+' ('+s.일천간한+s.일지지한+') | '+s.일천간오+'/'+s.일지지오,
-    '시주: '+s.시주명+' ('+s.시천간한+s.시지지한+') | '+s.시천간오+'/'+s.시지지오,
-    '오행: 木'+s.목비율+'% 火'+s.화비율+'% 土'+s.토비율+'% 金'+s.금비율+'% 水'+s.수비율+'%',
-    '강한오행: '+s.강한오행+' / 약한오행: '+s.약한오행,
-  ];
-}
-
 function copyRawData(){
-  const text=document.getElementById('rawDataContent').textContent;
-  navigator.clipboard.writeText(text).then(()=>{
+  const content=document.getElementById('rawDataContent').textContent;
+  navigator.clipboard.writeText(content).then(()=>{
     const btn=document.getElementById('rawCopyBtn');
-    btn.classList.add('copied');
-    btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 복사됨!';
-    setTimeout(()=>{
-      btn.classList.remove('copied');
-      btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 전체 복사';
-    },2000);
-  }).catch(()=>alert('복사에 실패했어요. 직접 선택해서 복사해주세요.'));
+    btn.classList.add('copied');btn.textContent='✓ 복사됨!';
+    setTimeout(()=>{btn.classList.remove('copied');btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> 전체 복사';},2000);
+  }).catch(()=>alert('복사 실패 — 수동으로 복사해 주세요.'));
 }
 
 function downloadOrderData(id){
   const o=allOrders.find(x=>x.id===id);if(!o)return;
-  const data=JSON.stringify(o,null,2);
-  const blob=new Blob([data],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='order_'+o.id+'_'+o.name+'.json';
-  a.click();
+  const data={order_id:o.id,name:o.name,gender:o.gender,email:o.email,phone:o.phone||'',product:o.product,price:o.price,birthdate:o.birthdate,calendar_type:o.calendar||'양력',birthtime:o.birthtime||'모름',status:o.status,confirmed_at:o.confirmedAt,saju_data:buildSajuData(o)};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='order_'+o.id+'_'+o.name+'.json';a.click();
 }
 
+function closeModal(id,e){
+  if(e&&e.target!==document.getElementById(id))return;
+  document.getElementById(id).classList.remove('open');
+}
 
+function openRegisterModal(){
+  const yr=document.getElementById('reg-year');yr.innerHTML='<option value="">년도</option>';
+  for(let y=new Date().getFullYear();y>=1920;y--)yr.innerHTML+=`<option>${y}</option>`;
+  const mo=document.getElementById('reg-month');mo.innerHTML='<option value="">월</option>';
+  for(let m=1;m<=12;m++)mo.innerHTML+=`<option>${m}</option>`;
+  const dy=document.getElementById('reg-day');dy.innerHTML='<option value="">일</option>';
+  for(let d=1;d<=31;d++)dy.innerHTML+=`<option>${d}</option>`;
+  const rp=document.getElementById('reg-product');rp.innerHTML=products.map(p=>`<option>${p.name}</option>`).join('');
+  document.getElementById('registerModal').classList.add('open');
+}
 
-function closeModal(id,e){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
+function saveRegister(){
+  const name=document.getElementById('reg-name').value.trim();
+  const gender=document.querySelector('input[name="reg-gender"]:checked')?.value||'남';
+  const year=document.getElementById('reg-year').value;
+  const month=document.getElementById('reg-month').value;
+  const day=document.getElementById('reg-day').value;
+  if(!name||!year||!month||!day){alert('이름과 생년월일은 필수입니다.');return;}
+  const cal=document.querySelector('input[name="reg-cal"]:checked')?.value||'양력';
+  const timeDirect=document.getElementById('reg-time-direct').value.trim();
+  const timeSelect=document.getElementById('reg-time-select').value;
+  const birthtime=timeDirect||timeSelect||'모름';
+  const today=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit'});
+  const pr=products.find(p=>p.name===document.getElementById('reg-product').value)||products[0];
+  const newOrder={id:Date.now(),status:'대기',name,gender:(gender==='남'?'남성':'여성'),phone:document.getElementById('reg-phone').value.trim()||'-',email:document.getElementById('reg-email').value.trim()||'-',product:pr?.name||'',prodCat:pr?.cat||'사주',price:pr?.price||0,birthdate:year+'-'+String(month).padStart(2,'0')+'-'+String(day).padStart(2,'0'),calendar:cal,birthtime,confirmedAt:today,sentAt:'-',hasPdf:false,category:'☯ 종합사주'};
+  allOrders.unshift(newOrder);
+  fetch(WEBHOOK,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(newOrder)}).catch(e=>console.log(e));
+  closeModal('registerModal');calcStats();renderOrders();showToast('✅ '+name+' 님 등록 완료!');
+}
+
+function renderCustomerList(){
+  const q=(document.getElementById('custSearch')?.value||'').trim();
+  const list=allOrders.filter(o=>!q||o.name.includes(q)||o.email.includes(q)||o.phone.includes(q));
+  document.getElementById('custCnt').textContent='총 '+list.length+'건';
+  document.getElementById('customerListBody').innerHTML=list.map(o=>`
+    <tr>
+      <td style="color:var(--navy);font-weight:500">${o.name}</td>
+      <td>${o.gender}</td>
+      <td style="font-size:12px">${o.birthdate}</td>
+      <td>${o.calendar}</td>
+      <td style="font-size:12px">${o.email}</td>
+      <td>${o.phone}</td>
+      <td>${o.product}</td>
+      <td style="font-size:12px">${o.confirmedAt}</td>
+      <td>${statusBadge(o.status)}</td>
+      <td>${analyzeBtn(o)}</td>
+    </tr>`).join('');
+}
 
 function manualRefresh(){
   const icon=document.getElementById('refreshIcon');
-  if(icon){icon.style.transition='transform 0.5s';icon.style.transform='rotate(360deg)';setTimeout(()=>{icon.style.transform='';},500);}
-  renderOrders();calcStats();renderProductTable();
+  icon.style.animation='spin 0.5s linear';
+  setTimeout(()=>{icon.style.animation='';},500);
+  calcStats();renderOrders();
 }
 
 function initAdmin(){
-  document.getElementById('topbarDate').textContent=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'short'});
+  document.getElementById('topbarDate').textContent=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
   calcStats();renderOrders();renderProductTable();
 }
-
 </script>
 </body>
 </html>
