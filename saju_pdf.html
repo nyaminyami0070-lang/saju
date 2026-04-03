@@ -1112,5 +1112,29 @@
   });
 })();
 </script>
+<script>
+const p = new URLSearchParams(window.location.search);
+
+// 기본 정보
+document.querySelectorAll('*').forEach(el => {
+  el.innerHTML = el.innerHTML
+    .replace(/\{\{이름\}\}/g,     p.get('name')      || '')
+    .replace(/\{\{name\}\}/g,     p.get('name')      || '')
+    .replace(/\{\{birthdate\}\}/g, p.get('birthdate') || '')
+    .replace(/\{\{birthtime\}\}/g, p.get('birthtime') || '')
+    .replace(/\{\{gender\}\}/g,   p.get('gender')    || '');
+});
+
+// GPT 분석 내용 — 줄바꿈 보존
+const gpt1 = (p.get('gpt1') || '').replace(/\n/g, '<br>');
+const gpt2 = (p.get('gpt2') || '').replace(/\n/g, '<br>');
+
+document.querySelectorAll('*').forEach(el => {
+  el.innerHTML = el.innerHTML
+    .replace(/\{\{일간설명\}\}/g,       gpt1)
+    .replace(/\{\{일간핵심포인트\}\}/g,  gpt1)
+    .replace(/\{\{년주분석내용\}\}/g,    gpt2);
+});
+</script>
 </body>
 </html>
