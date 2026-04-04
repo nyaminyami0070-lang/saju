@@ -953,7 +953,7 @@ function startAnalyze(id){
   if(!confirm(o.name+' 님의 사주 분석을 시작할까요?\n\nMake 웹훅으로 데이터가 전송되고 GPT가 분석을 진행합니다.'))return;
   o.status='분석중';calcStats();renderOrders();
   const payload={type:'analyze',order_id:o.id,name:o.name,gender:o.gender,email:o.email,phone:o.phone||'',birthdate:o.birthdate,calendar_type:o.calendar||'양력',birthtime:o.birthtime||'모름',product:o.product,category:o.category||'☯ 종합사주',price:o.price,confirmed_at:o.confirmedAt,requested_at:new Date().toISOString()};
-  fetch(WEBHOOK_ANALYZE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+  fetch(WEBHOOK_ANALYZE,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)})
   .then(res=>{o.status=res.ok?'분석완료':'실패';if(!res.ok)alert('웹훅 전송 중 오류가 발생했어요. ('+res.status+')');})
   .catch(e=>{o.status='분석완료';console.log('웹훅 전송(catch):',e);})
   .finally(()=>{calcStats();renderOrders();if(o.status==='분석완료')showToast('🔮 '+o.name+' 님 분석 완료!');});
