@@ -1038,7 +1038,7 @@ function renderProductTable(){
     </tr>`).join('');
 }
 function toggleProdStatus(id){const p=products.find(x=>x.id===id);if(!p)return;p.status=p.status==='판매중'?'판매중지':'판매중';renderProductTable();}
-function attachPdfTemplate(id,input){const f=input.files[0];if(!f)return;const p=products.find(x=>x.id===id);if(!p)return;p.pdfTemplate=URL.createObjectURL(f);p.pdfTemplateName=f.name;renderProductTable();}
+function attachPdfTemplate(id,input){const f=input.files[0];if(!f)return;const p=products.find(x=>x.id===id);if(!p)return;p.pdfTemplate=.createObject(f);p.pdfTemplateName=f.name;renderProductTable();}
 function removePdfTemplate(id){if(!confirm('PDF 템플릿을 제거할까요?'))return;const p=products.find(x=>x.id===id);if(!p)return;p.pdfTemplate=null;p.pdfTemplateName='';renderProductTable();}
 function deleteProduct(id){if(!confirm('이 상품을 삭제할까요?'))return;products=products.filter(x=>x.id!==id);renderProductTable();}
 function openProductModal(id){
