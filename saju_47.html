@@ -302,6 +302,9 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
     <div class="content">
 
       <div class="tab-panel active" id="tab-orderConfirm">
+        <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:14px">
+          <button class="add-btn" onclick="openRegisterModal()">+ 개별 등록</button>
+        </div>
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-label">오늘 신규</div><div class="stat-value" id="st-today">0</div><div class="stat-sub">↑ 어제 대비 +2</div></div>
           <div class="stat-card"><div class="stat-label">전송 완료</div><div class="stat-value" id="st-done" style="color:var(--green)">0</div></div>
@@ -329,7 +332,7 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
             <table class="main-tbl">
               <thead><tr>
                 <th class="cb-cell"><div class="cb" id="allCb" onclick="toggleAllCb()"></div></th>
-                <th>현황</th><th>이름</th><th>전화번호</th><th>이메일</th><th>상품명</th><th>확정 날짜</th><th>분석</th><th>결과</th><th>액션</th>
+                <th>현황</th><th>이름</th><th>전화번호</th><th>이메일</th><th>상품명</th><th>확정 날짜</th><th>분석</th><th>결과</th><th>수정</th><th>액션</th>
               </tr></thead>
               <tbody id="orderTableBody"></tbody>
             </table>
@@ -501,6 +504,59 @@ table.prod-tbl tr:hover td{background:#f5f8ff;}
     </div>
     <div class="raw-code-wrap">
       <pre class="raw-code" id="rawDataContent"></pre>
+    </div>
+  </div>
+</div>
+
+<!-- 고객 정보 수정 모달 -->
+<div class="modal-overlay" id="editModal" onclick="closeModal('editModal',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-hd"><div class="modal-title">✏️ 고객 정보 수정</div><button class="modal-close" onclick="closeModal('editModal')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="m-label-req" style="font-size:11px;color:var(--text3);margin-bottom:4px">이름</div>
+      <input class="m-input" id="edit-name" placeholder="이름 입력">
+      <div class="m-label-req" style="font-size:11px;color:var(--text3);margin-bottom:4px">성별</div>
+      <div class="radio-group">
+        <label><input type="radio" name="edit-gender" value="남성"> 남</label>
+        <label><input type="radio" name="edit-gender" value="여성"> 여</label>
+      </div>
+      <div class="m-label-req" style="font-size:11px;color:var(--text3);margin-bottom:4px">생년월일</div>
+      <input class="m-input" id="edit-birthdate" placeholder="YYYY-MM-DD">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">음양력</div>
+      <div class="radio-group">
+        <label><input type="radio" name="edit-cal" value="양력"> 양력</label>
+        <label><input type="radio" name="edit-cal" value="음력"> 음력</label>
+        <label><input type="radio" name="edit-cal" value="윤달"> 윤달</label>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">출생시간</div>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input class="m-input" id="edit-birthtime" placeholder="예: 1430 또는 모름" style="flex:1;margin-bottom:0;">
+        <select class="m-input" id="edit-time-select" style="flex:2;margin-bottom:0;" onchange="if(this.value)document.getElementById('edit-birthtime').value=this.value">
+          <option value="">간지시간 선택</option>
+          <option>자시 (23:00~01:00)</option><option>축시 (01:00~03:00)</option>
+          <option>인시 (03:00~05:00)</option><option>묘시 (05:00~07:00)</option>
+          <option>진시 (07:00~09:00)</option><option>사시 (09:00~11:00)</option>
+          <option>오시 (11:00~13:00)</option><option>미시 (13:00~15:00)</option>
+          <option>신시 (15:00~17:00)</option><option>유시 (17:00~19:00)</option>
+          <option>술시 (19:00~21:00)</option><option>해시 (21:00~23:00)</option>
+          <option>모름</option>
+        </select>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">이메일</div>
+      <input class="m-input" id="edit-email" placeholder="example@email.com">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">휴대폰</div>
+      <input class="m-input" id="edit-phone" placeholder="010-1234-5678">
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">상품</div>
+      <select class="m-input" id="edit-product"></select>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:4px">현황</div>
+      <select class="m-input" id="edit-status">
+        <option>대기</option><option>분석중</option><option>분석완료</option><option>PDF완료</option><option>발송완료</option><option>실패</option>
+      </select>
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button class="m-save-btn" onclick="saveEdit()">저장하기</button>
+        <button class="m-save-btn" style="background:#fdeaea;color:#b83232;border:1px solid rgba(184,50,50,.2)" onclick="deleteOrder()">삭제</button>
+      </div>
     </div>
   </div>
 </div>
@@ -889,6 +945,11 @@ function renderOrders(){
       <td onclick="event.stopPropagation()">${analyzeBtn(o)}</td>
       <td>${o.hasPdf?'<span class="pdf-btn">📄 PDF</span>':'<span style="color:var(--text3);font-size:12px">-</span>'}</td>
       <td onclick="event.stopPropagation()">
+        <button class="icon-action-btn" title="고객 정보 수정" onclick="openEditModal(${o.id})" style="border-color:rgba(109,40,217,.3);color:#7c3aed;background:#f5f0ff;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+      </td>
+      <td onclick="event.stopPropagation()">
         <div style="display:flex;align-items:center;gap:5px">
           <button class="icon-action-btn" title="상세 보기" onclick="openOrderModal(${o.id})">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
@@ -1227,6 +1288,50 @@ function downloadOrderData(id){
 function closeModal(id,e){
   if(e&&e.target!==document.getElementById(id))return;
   document.getElementById(id).classList.remove('open');
+}
+
+function openEditModal(id){
+  const o=allOrders.find(x=>x.id===id);if(!o)return;
+  document.getElementById('edit-id').value=o.id;
+  document.getElementById('edit-name').value=o.name||'';
+  document.querySelectorAll('input[name="edit-gender"]').forEach(r=>{r.checked=r.value===o.gender;});
+  document.getElementById('edit-birthdate').value=o.birthdate||'';
+  document.querySelectorAll('input[name="edit-cal"]').forEach(r=>{r.checked=r.value===(o.calendar||'양력');});
+  document.getElementById('edit-birthtime').value=o.birthtime||'';
+  document.getElementById('edit-time-select').value='';
+  document.getElementById('edit-email').value=o.email||'';
+  document.getElementById('edit-phone').value=o.phone||'';
+  const ep=document.getElementById('edit-product');
+  ep.innerHTML=products.map(p=>`<option ${p.name===o.product?'selected':''}>${p.name}</option>`).join('');
+  document.getElementById('edit-status').value=o.status||'대기';
+  document.getElementById('editModal').classList.add('open');
+}
+
+function saveEdit(){
+  const id=parseInt(document.getElementById('edit-id').value);
+  const o=allOrders.find(x=>x.id===id);if(!o)return;
+  const name=document.getElementById('edit-name').value.trim();
+  if(!name){alert('이름은 필수입니다.');return;}
+  o.name=name;
+  o.gender=document.querySelector('input[name="edit-gender"]:checked')?.value||o.gender;
+  o.birthdate=document.getElementById('edit-birthdate').value.trim()||o.birthdate;
+  o.calendar=document.querySelector('input[name="edit-cal"]:checked')?.value||o.calendar;
+  o.birthtime=document.getElementById('edit-birthtime').value.trim()||'모름';
+  o.email=document.getElementById('edit-email').value.trim()||o.email;
+  o.phone=document.getElementById('edit-phone').value.trim()||o.phone;
+  o.product=document.getElementById('edit-product').value||o.product;
+  o.status=document.getElementById('edit-status').value||o.status;
+  closeModal('editModal');calcStats();renderOrders();renderCustomerList();
+  showToast('✅ '+o.name+' 님 정보 수정 완료!');
+}
+
+function deleteOrder(){
+  const id=parseInt(document.getElementById('edit-id').value);
+  const o=allOrders.find(x=>x.id===id);if(!o)return;
+  if(!confirm(o.name+' 님 주문을 삭제할까요?'))return;
+  allOrders=allOrders.filter(x=>x.id!==id);
+  closeModal('editModal');calcStats();renderOrders();renderCustomerList();
+  showToast('🗑️ '+o.name+' 님 주문이 삭제됐어요.');
 }
 
 function openRegisterModal(){
