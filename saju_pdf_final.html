@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>나만의 운명 활용법 - 사주 분석 보고서</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --gold: #C9A84C; --gold-light: #F0D080; --ink: #1a1a2e;
+  --text: #1e1e1e; --text-light: #555; --bg: #ffffff;
+  --bg-soft: #f9f7f4; --bg-section: #f4f1ec;
+  --border: #e0d8cc; --accent: #2c3e6b;
+}
+body { font-family: 'Noto Serif KR', serif; color: var(--text); background: var(--bg); font-size: 11pt; line-height: 1.9; }
+.page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 20mm 22mm; position: relative; page-break-after: always; overflow: hidden; }
+@media print { body { margin: 0; } .page { margin: 0; page-break-after: always; } }
+.page-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid var(--gold); padding-bottom: 8px; margin-bottom: 32px; font-family: 'Noto Sans KR', sans-serif; font-size: 8.5pt; color: var(--text-light); }
+.page-header .brand { color: var(--gold); font-weight: 700; letter-spacing: 1px; }
+.page-footer { position: absolute; bottom: 14mm; left: 22mm; right: 22mm; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 8px; font-family: 'Noto Sans KR', sans-serif; font-size: 8pt; color: #aaa; }
+.toc-page { background: var(--bg-soft); }
+.toc-title { font-size: 28pt; font-weight: 900; color: var(--accent); margin-bottom: 8px; line-height: 1.3; }
+.toc-subtitle { font-family: 'Noto Sans KR', sans-serif; font-size: 10pt; color: var(--text-light); margin-bottom: 48px; }
+.toc-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px dashed var(--border); font-size: 11pt; }
+.toc-item:last-child { border-bottom: none; }
+.toc-num { font-family: 'Noto Sans KR', sans-serif; font-size: 9pt; color: var(--gold); font-weight: 700; margin-right: 16px; min-width: 24px; }
+.toc-name { flex: 1; }
+.toc-page-num { font-family: 'Noto Sans KR', sans-serif; font-size: 9pt; color: var(--text-light); }
+.section-cover { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 297mm; margin: -20mm -22mm; background: var(--ink); text-align: center; }
+.section-cover-num { font-family: 'Noto Sans KR', sans-serif; font-size: 9pt; letter-spacing: 8px; color: var(--gold); margin-bottom: 24px; }
+.section-cover-title { font-size: 36pt; font-weight: 900; color: #fff; line-height: 1.3; margin-bottom: 20px; }
+.section-cover-sub { font-family: 'Noto Sans KR', sans-serif; font-size: 10pt; color: rgba(255,255,255,0.5); max-width: 320px; line-height: 1.8; }
+.section-cover-line { width: 60px; height: 2px; background: var(--gold); margin: 24px auto; }
+.section-title { font-size: 20pt; font-weight: 900; color: var(--accent); margin-bottom: 6px; }
+.section-title-en { font-family: 'Noto Sans KR', sans-serif; font-size: 9pt; color: var(--gold); letter-spacing: 3px; margin-bottom: 28px; display: block; }
+.section-divider { height: 2px; background: linear-gradient(to right, var(--gold), transparent); margin-bottom: 28px; }
+h3 { font-size: 13pt; font-weight: 700; color: var(--accent); margin: 28px 0 12px; padding-left: 12px; border-left: 3px solid var(--gold); }
+p { margin-bottom: 12px; line-height: 1.95; }
+.info-box { background: var(--bg-section); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 18px 20px; margin: 20px 0; border-radius: 0 4px 4px 0; }
+.info-box-title { font-family: 'Noto Sans KR', sans-serif; font-size: 9pt; font-weight: 700; color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; }
+
+/* =============================================
+   사주 원국표 — 한글+한자 병기 스타일 (수정됨)
+   ============================================= */
+.pillar-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-family: 'Noto Sans KR', sans-serif; }
+.pillar-table th { background: var(--ink); color: var(--gold); padding: 12px; text-align: center; font-size: 10pt; font-weight: 700; letter-spacing: 2px; }
+.pillar-table td { padding: 16px 10px 14px; text-align: center; border: 1px solid var(--border); font-size: 10pt; vertical-align: middle; }
+.pillar-table tr:nth-child(even) td { background: var(--bg-soft); }
+
+/* 천간/지지 라벨 */
+.pillar-col-label {
+  font-size: 7.5pt;
+  color: #bbb;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 1px;
+}
+
+/* 한글+한자 병기 메인 글자 */
+.pillar-main {
+  font-size: 19pt;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1.1;
+  margin-bottom: 5px;
+  font-family: 'Noto Serif KR', serif;
+}
+.pillar-main .hanja {
+  font-size: 17pt;
+  color: var(--accent);
+  opacity: 0.75;
+  margin-left: 2px;
+}
+
+/* 일간(日干)만 골드 강조 */
+.ilgan .pillar-main {
+  color: var(--gold);
+}
+.ilgan .pillar-main .hanja {
+  color: var(--gold);
+  opacity: 0.85;
+}
+
+/* 음양오행 부제 */
+.pillar-sub {
+  font-size: 8pt;
+  color: var(--text-light);
+  font-family: 'Noto Sans KR', sans-serif;
+  display: block;
+  margin-bottom: 5px;
+  letter-spacing: 0.3px;
+}
+
+/* 오행 뱃지 */
+.pillar-element { display: inline-block; padding: 2px 8px; border-radius: 2px; font-size: 8.5pt; font-weight: 700; margin-top: 2px; }
+.el-wood { background: #e8f5e9; color: #2e7d32; }
+.el-fire { background: #fce4ec; color: #c62828; }
+.el-earth { background: #fff8e1; color: #f57f17; }
+.el-metal { background: #f3e5f5; color: #6a1b9a; }
+.el-water { background: #e3f2fd; color: #1565c0; }
+
+/* =============================================
+   이하 기존 스타일 유지
+   ============================================= */
+.strength-bar-wrap { margin: 20px 0; }
+.strength-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-family: 'Noto Sans KR', sans-serif; font-size: 9.5pt; }
+.strength-label { width: 40px; font-weight: 700; }
+.strength-bar-bg { flex: 1; height: 10px; background: var(--border); border-radius: 5px; overflow: hidden; }
+.strength-bar { height: 100%; border-radius: 5px; }
+.strength-val { width: 32px; text-align: right; color: var(--text-light); font-size: 8.5pt; }
+.timeline { margin: 24px 0; }
+.timeline-item { display: flex; gap: 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px dashed var(--border); }
+.timeline-item:last-child { border-bottom: none; }
+.timeline-age { min-width: 60px; font-family: 'Noto Sans KR', sans-serif; font-size: 10pt; font-weight: 700; color: var(--gold); text-align: center; background: var(--bg-section); padding: 8px 4px; border: 1px solid var(--border); height: fit-content; }
+.timeline-content { flex: 1; }
+.timeline-title { font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.tag-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.tag { font-family: 'Noto Sans KR', sans-serif; font-size: 9pt; padding: 4px 12px; border: 1px solid var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+.tag.filled { background: var(--gold); color: #fff; border-color: var(--gold); }
+.highlight-box { background: var(--ink); color: #fff; padding: 20px 24px; margin: 20px 0; }
+.highlight-box p { color: rgba(255,255,255,0.85); margin-bottom: 0; }
+.highlight-box strong { color: var(--gold-light); }
+.checklist { list-style: none; margin: 14px 0; }
+.checklist li { padding: 8px 0 8px 28px; position: relative; border-bottom: 1px solid var(--border); font-size: 10.5pt; }
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before { content: '✦'; position: absolute; left: 0; color: var(--gold); font-size: 9pt; top: 9px; }
+.score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+.score-card { text-align: center; padding: 16px 8px; border: 1px solid var(--border); background: var(--bg-soft); }
+.score-card-label { font-family: 'Noto Sans KR', sans-serif; font-size: 8.5pt; color: var(--text-light); margin-bottom: 8px; }
+.score-card-num { font-size: 18pt; font-weight: 900; color: var(--accent); line-height: 1; }
+.score-card-unit { font-size: 9pt; color: var(--text-light); }
+.quote { border-left: 3px solid var(--gold); padding: 12px 20px; margin: 20px 0; background: var(--bg-soft); font-style: italic; font-size: 11pt; color: var(--accent); }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 16px 0; }
+.caution-box { background: #fff8f0; border: 1px solid #f0c080; border-left: 4px solid #e8a020; padding: 14px 18px; margin: 16px 0; font-family: 'Noto Sans KR', sans-serif; font-size: 10pt; }
+.point-box { background: #f0f4ff; border: 1px solid #c0d0f0; border-left: 4px solid var(--accent); padding: 14px 18px; margin: 16px 0; font-family: 'Noto Sans KR', sans-serif; font-size: 10pt; }
+</style>
+</head>
+<body>
+
+<!-- 표지 -->
+<div class="page" style="padding:0; margin:0 auto;">
+  <img src="https://github.com/nyaminyami0070-lang/saju/blob/main/main.png?raw=true" alt="표지" style="width:210mm; height:297mm; object-fit:cover; display:block;">
+</div>
+
+<!-- 목차 -->
+<div class="page toc-page">
+  <div style="margin-bottom:48px;">
+    <div style="font-family:'Noto Sans KR',sans-serif; font-size:9pt; color:var(--gold); letter-spacing:4px; margin-bottom:12px;">나만의 운명 활용법</div>
+    <div class="toc-title">사주 분석<br>보고서</div>
+    <div class="toc-subtitle">{{47.name}} 님의 사주를 깊이 들여다봅니다</div>
+    <div style="display:flex; gap:32px; font-family:'Noto Sans KR',sans-serif; font-size:9.5pt; color:var(--text-light);">
+      <div>생년월일 <strong style="color:var(--text);">{{47.birthdate}}</strong></div>
+      <div>태어난 시간 <strong style="color:var(--text);">{{47.birthtime}}</strong></div>
+      <div>성별 <strong style="color:var(--text);">{{47.gender}}</strong></div>
+    </div>
+  </div>
+  <div style="height:1px; background:var(--gold); margin-bottom:32px; opacity:0.4;"></div>
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-name">사주 파내 — 년·월·일·시 분석</span><span class="toc-page-num">p.4</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-name">오행 강약 분석</span><span class="toc-page-num">p.12</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-name">대운 흐름 분석</span><span class="toc-page-num">p.20</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-name">연애운 — 인연의 타이밍</span><span class="toc-page-num">p.40</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-name">재물운 — 돈의 흐름과 기회</span><span class="toc-page-num">p.70</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-name">직업·진로운 — 나에게 맞는 길</span><span class="toc-page-num">p.100</span></div>
+  <div class="toc-item"><span class="toc-num">07</span><span class="toc-name">개운법 — 운을 바꾸는 방법</span><span class="toc-page-num">p.135</span></div>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>1</span></div>
+</div>
+
+<!-- SECTION 01 커버 -->
+<div class="page">
+  <div class="section-cover">
+    <div class="section-cover-num">SECTION 01</div>
+    <div class="section-cover-line"></div>
+    <div class="section-cover-title">사주 파내</div>
+    <div class="section-cover-sub">년주·월주·일주·시주<br>당신의 타고난 그릇을 분석합니다</div>
+  </div>
+</div>
+
+<!-- SECTION 01 내용 — 사주 원국표 (수정됨) -->
+<div class="page">
+  <div class="page-header"><span class="brand">나만의 운명 활용법</span><span>SECTION 01 · 사주 파내</span></div>
+  <div class="section-title">사주 원국</div>
+  <span class="section-title-en">FOUR PILLARS OF DESTINY</span>
+  <div class="section-divider"></div>
+
+  <table class="pillar-table">
+    <thead>
+      <tr>
+        <th>시주 (時柱)</th>
+        <th>일주 (日柱)</th>
+        <th>월주 (月柱)</th>
+        <th>년주 (年柱)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 천간 행 -->
+      <tr>
+        <td>
+          <span class="pillar-col-label">천간</span>
+          <span class="pillar-main" id="si-chun"></span>
+          <span class="pillar-sub" id="si-chun-sub">{{46.시천간음양오행}}</span>
+          <span class="pillar-element" id="si-chun-el">{{46.시천간오행}}</span>
+        </td>
+        <td class="ilgan">
+          <span class="pillar-col-label">천간 · 일간</span>
+          <span class="pillar-main" id="il-chun"></span>
+          <span class="pillar-sub" id="il-chun-sub">{{46.일천간음양오행}}</span>
+          <span class="pillar-element" id="il-chun-el">{{46.일천간오행}}</span>
+        </td>
+        <td>
+          <span class="pillar-col-label">천간</span>
+          <span class="pillar-main" id="wol-chun"></span>
+          <span class="pillar-sub" id="wol-chun-sub">{{46.월천간음양오행}}</span>
+          <span class="pillar-element" id="wol-chun-el">{{46.월천간오행}}</span>
+        </td>
+        <td>
+          <span class="pillar-col-label">천간</span>
+          <span class="pillar-main" id="nyeon-chun"></span>
+          <span class="pillar-sub" id="nyeon-chun-sub">{{46.년천간음양오행}}</span>
+          <span class="pillar-element" id="nyeon-chun-el">{{46.년천간오행}}</span>
+        </td>
+      </tr>
+      <!-- 지지 행 -->
+      <tr>
+        <td>
+          <span class="pillar-col-label">지지</span>
+          <span class="pillar-main" id="si-ji"></span>
+          <span class="pillar-sub" id="si-ji-sub">{{46.시지지동물}}</span>
+          <span class="pillar-element" id="si-ji-el">{{46.시지지오행}}</span>
+        </td>
+        <td class="ilgan">
+          <span class="pillar-col-label">지지</span>
+          <span class="pillar-main" id="il-ji"></span>
+          <span class="pillar-sub" id="il-ji-sub">{{46.일지지동물}}</span>
+          <span class="pillar-element" id="il-ji-el">{{46.일지지오행}}</span>
+        </td>
+        <td>
+          <span class="pillar-col-label">지지</span>
+          <span class="pillar-main" id="wol-ji"></span>
+          <span class="pillar-sub" id="wol-ji-sub">{{46.월지지동물}}</span>
+          <span class="pillar-element" id="wol-ji-el">{{46.월지지오행}}</span>
+        </td>
+        <td>
+          <span class="pillar-col-label">지지</span>
+          <span class="pillar-main" id="nyeon-ji"></span>
+          <span class="pillar-sub" id="nyeon-ji-sub">{{46.년지지동물}}</span>
+          <span class="pillar-element" id="nyeon-ji-el">{{46.년지지오행}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>일간(日干)의 의미</h3>
+  <p>{{47.name}} 님의 일간은 <strong id="ilgan-display"></strong>입니다. {{46.일간설명}}</p>
+  <div class="info-box"><div class="info-box-title">✦ 핵심 포인트</div><p>{{46.일간핵심포인트}}</p></div>
+  <h3>년주 — 타고난 환경과 조상의 기운</h3>
+  <p>{{46.년주분석내용}}</p>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>4</span></div>
+</div>
+
+<!-- 오행 강약 -->
+<div class="page">
+  <div class="page-header"><span class="brand">나만의 운명 활용법</span><span>SECTION 01 · 사주 파내</span></div>
+  <div class="section-title">오행 강약 분석</div>
+  <span class="section-title-en">FIVE ELEMENTS ANALYSIS</span>
+  <div class="section-divider"></div>
+  <p>{{47.name}} 님의 사주에서 각 오행이 차지하는 비중을 분석합니다.</p>
+  <div class="strength-bar-wrap">
+    <div class="strength-row"><span class="strength-label" style="color:#2e7d32;">木</span><div class="strength-bar-bg"><div class="strength-bar" style="width:{{46.목비율}}%; background:#4caf50;"></div></div><span class="strength-val">{{46.목비율}}%</span></div>
+    <div class="strength-row"><span class="strength-label" style="color:#c62828;">火</span><div class="strength-bar-bg"><div class="strength-bar" style="width:{{46.화비율}}%; background:#ef5350;"></div></div><span class="strength-val">{{46.화비율}}%</span></div>
+    <div class="strength-row"><span class="strength-label" style="color:#f57f17;">土</span><div class="strength-bar-bg"><div class="strength-bar" style="width:{{46.토비율}}%; background:#ffa726;"></div></div><span class="strength-val">{{46.토비율}}%</span></div>
+    <div class="strength-row"><span class="strength-label" style="color:#6a1b9a;">金</span><div class="strength-bar-bg"><div class="strength-bar" style="width:{{46.금비율}}%; background:#ab47bc;"></div></div><span class="strength-val">{{46.금비율}}%</span></div>
+    <div class="strength-row"><span class="strength-label" style="color:#1565c0;">水</span><div class="strength-bar-bg"><div class="strength-bar" style="width:{{46.수비율}}%; background:#42a5f5;"></div></div><span class="strength-val">{{46.수비율}}%</span></div>
+  </div>
+  <div class="two-col">
+    <div class="info-box"><div class="info-box-title">✦ 가장 강한 오행</div><p>{{46.강한오행설명}}</p></div>
+    <div class="info-box"><div class="info-box-title">✦ 가장 약한 오행</div><p>{{46.약한오행설명}}</p></div>
+  </div>
+  <h3>용신(用神)과 기신(忌神)</h3>
+  <p>{{46.용신기신설명}}</p>
+  <div class="tag-wrap">
+    <span class="tag filled">용신: {{46.용신}}</span>
+    <span class="tag">희신: {{46.희신}}</span>
+    <span class="tag">기신: {{46.기신}}</span>
+    <span class="tag">구신: {{46.구신}}</span>
+  </div>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>12</span></div>
+</div>
+
+<!-- SECTION 02 커버 -->
+<div class="page">
+  <div class="section-cover">
+    <div class="section-cover-num">SECTION 02</div>
+    <div class="section-cover-line"></div>
+    <div class="section-cover-title">대운 흐름 분석</div>
+    <div class="section-cover-sub">10년 단위로 펼쳐지는<br>인생의 큰 흐름을 읽습니다</div>
+  </div>
+</div>
+
+<!-- SECTION 02 내용 -->
+<div class="page">
+  <div class="page-header"><span class="brand">나만의 운명 활용법</span><span>SECTION 02 · 대운 흐름</span></div>
+  <div class="section-title">대운 타임라인</div>
+  <span class="section-title-en">MAJOR LUCK CYCLE</span>
+  <div class="section-divider"></div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-age">{{46.대운1나이}}세<br>~<br>{{46.대운1끝나이}}세</div>
+      <div class="timeline-content"><div class="timeline-title">{{46.대운1간지}} 대운</div><p>{{46.대운1내용}}</p><div class="tag-wrap"><span class="tag">{{46.대운1키워드1}}</span><span class="tag">{{46.대운1키워드2}}</span><span class="tag">{{46.대운1키워드3}}</span></div></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-age">{{46.대운2나이}}세<br>~<br>{{46.대운2끝나이}}세</div>
+      <div class="timeline-content"><div class="timeline-title">{{46.대운2간지}} 대운</div><p>{{46.대운2내용}}</p><div class="tag-wrap"><span class="tag">{{46.대운2키워드1}}</span><span class="tag">{{46.대운2키워드2}}</span><span class="tag">{{46.대운2키워드3}}</span></div></div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-age">{{46.대운3나이}}세<br>~<br>{{46.대운3끝나이}}세</div>
+      <div class="timeline-content"><div class="timeline-title">{{46.대운3간지}} 대운</div><p>{{46.대운3내용}}</p><div class="tag-wrap"><span class="tag">{{46.대운3키워드1}}</span><span class="tag">{{46.대운3키워드2}}</span><span class="tag">{{46.대운3키워드3}}</span></div></div>
+    </div>
+  </div>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>20</span></div>
+</div>
+
+<!-- SECTION 03 커버 -->
+<div class="page">
+  <div class="section-cover">
+    <div class="section-cover-num">SECTION 03</div>
+    <div class="section-cover-line"></div>
+    <div class="section-cover-title">연애운</div>
+    <div class="section-cover-sub">인연의 타이밍과<br>나에게 맞는 사람을 분석합니다</div>
+  </div>
+</div>
+
+<!-- SECTION 03 내용 -->
+<div class="page">
+  <div class="page-header"><span class="brand">나만의 운명 활용법</span><span>SECTION 03 · 연애운</span></div>
+  <div class="section-title">나의 연애 스타일</div>
+  <span class="section-title-en">LOVE &amp; RELATIONSHIP</span>
+  <div class="section-divider"></div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-card-label">인연운 지수</div><div class="score-card-num">{{46.인연운지수}}</div><div class="score-card-unit">/ 100</div></div>
+    <div class="score-card"><div class="score-card-label">결혼운 지수</div><div class="score-card-num">{{46.결혼운지수}}</div><div class="score-card-unit">/ 100</div></div>
+    <div class="score-card"><div class="score-card-label">이별 위험도</div><div class="score-card-num">{{46.이별위험도}}</div><div class="score-card-unit">/ 100</div></div>
+  </div>
+  <h3>타고난 연애 성향</h3><p>{{46.연애성향분석}}</p>
+  <h3>나에게 맞는 이성의 특징</h3>
+  <div class="info-box"><div class="info-box-title">✦ 이상적인 인연의 조건</div><ul class="checklist"><li>{{46.이상형조건1}}</li><li>{{46.이상형조건2}}</li><li>{{46.이상형조건3}}</li><li>{{46.이상형조건4}}</li></ul></div>
+  <h3>인연이 찾아오는 타이밍</h3><p>{{46.인연타이밍분석}}</p>
+  <div class="highlight-box"><p><strong>올해의 연애운:</strong> {{46.올해연애운}}</p></div>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>40</span></div>
+</div>
+
+<!-- SECTION 04 커버 -->
+<div class="page">
+  <div class="section-cover">
+    <div class="section-cover-num">SECTION 04</div>
+    <div class="section-cover-line"></div>
+    <div class="section-cover-title">재물운</div>
+    <div class="section-cover-sub">돈의 흐름과 기회의 타이밍<br>재물을 모으는 나만의 전략</div>
+  </div>
+</div>
+
+<!-- SECTION 04 내용 -->
+<div class="page">
+  <div class="page-header"><span class="brand">나만의 운명 활용법</span><span>SECTION 04 · 재물운</span></div>
+  <div class="section-title">나의 재물 구조</div>
+  <span class="section-title-en">WEALTH &amp; FORTUNE</span>
+  <div class="section-divider"></div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-card-label">재물운 지수</div><div class="score-card-num">{{46.재물운지수}}</div><div class="score-card-unit">/ 100</div></div>
+    <div class="score-card"><div class="score-card-label">투자 적합도</div><div class="score-card-num">{{46.투자적합도}}</div><div class="score-card-unit">/ 100</div></div>
+    <div class="score-card"><div class="score-card-label">사업 적합도</div><div class="score-card-num">{{46.사업적합도}}</div><div class="score-card-unit">/ 100</div></div>
+  </div>
+  <h3>타고난 재물 성향</h3><p>{{46.재물성향분석}}</p>
+  <div class="info-box"><div class="info-box-title">✦ 재물 상승 타이밍</div><p>{{46.재물상승타이밍}}</p></div>
+  <div class="caution-box">⚠️ <strong>주의할 시기:</strong> {{46.재물주의시기}}</div>
+  <h3>재물을 늘리는 전략</h3>
+  <ul class="checklist"><li>{{46.재물전략1}}</li><li>{{46.재물전략2}}</li><li>{{46.재물전략3}}</li><li>{{46.재물전략4}}</li></ul>
+  <div class="highlight-box"><p><strong>올해의 재물운:</strong> {{46.올해재물운}}</p></div>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>70</span></div>
+</div>
+
+<!-- SECTION 05 커버 -->
+<div class="page">
+  <div class="section-cover">
+    <div class="section-cover-num">SECTION 05</div>
+    <div class="section-cover-line"></div>
+    <div class="section-cover-title">직업·진로운</div>
+    <div class="section-cover-sub">타고난 재능과 적성<br>나에게 맞는 일의 방향</div>
+  </div>
+</div>
+
+<!-- SECTION 05 내용 -->
+<div class="page">
+  <div class="page-header"><span class="brand">나만의 운명 활용법</span><span>SECTION 05 · 직업·진로운</span></div>
+  <div class="section-title">나의 직업 적성</div>
+  <span class="section-title-en">CAREER &amp; VOCATION</span>
+  <div class="section-divider"></div>
+  <h3>타고난 능력과 재능</h3><p>{{46.타고난재능분석}}</p>
+  <div class="tag-wrap"><span class="tag filled">{{46.재능키워드1}}</span><span class="tag filled">{{46.재능키워드2}}</span><span class="tag filled">{{46.재능키워드3}}</span><span class="tag">{{46.재능키워드4}}</span><span class="tag">{{46.재능키워드5}}</span></div>
+  <h3>적합한 직업군</h3>
+  <div class="two-col">
+    <div class="info-box"><div class="info-box-title">✦ 강력 추천 직업</div><ul class="checklist"><li>{{46.추천직업1}}</li><li>{{46.추천직업2}}</li><li>{{46.추천직업3}}</li></ul></div>
+    <div class="info-box"><div class="info-box-title">✦ 피하면 좋은 직업</div><ul class="checklist"><li>{{46.비추천직업1}}</li><li>{{46.비추천직업2}}</li><li>{{46.비추천직업3}}</li></ul></div>
+  </div>
+  <h3>직장인 vs 사업가</h3><p>{{46.직장사업분석}}</p>
+  <div class="point-box">💡 <strong>커리어 전환 최적 시기:</strong> {{46.커리어전환시기}}</div>
+  <div class="highlight-box"><p><strong>올해의 직업운:</strong> {{46.올해직업운}}</p></div>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>100</span></div>
+</div>
+
+<!-- SECTION 06 커버 -->
+<div class="page">
+  <div class="section-cover">
+    <div class="section-cover-num">SECTION 06</div>
+    <div class="section-cover-line"></div>
+    <div class="section-cover-title">개운법</div>
+    <div class="section-cover-sub">운을 바꾸는 나만의 방법<br>지금 당장 실천할 수 있는 것들</div>
+  </div>
+</div>
+
+<!-- SECTION 06 내용 -->
+<div class="page">
+  <div class="page-header"><span class="brand">나만의 운명 활용법</span><span>SECTION 06 · 개운법</span></div>
+  <div class="section-title">나를 위한 개운법</div>
+  <span class="section-title-en">FORTUNE ENHANCEMENT</span>
+  <div class="section-divider"></div>
+  <div class="quote">운명은 타고나지만, 개운은 만들어가는 것입니다.</div>
+  <h3>색깔 개운법</h3><p>{{46.색깔개운법설명}}</p>
+  <div class="tag-wrap"><span class="tag filled">행운색: {{46.행운색1}}</span><span class="tag filled">{{46.행운색2}}</span><span class="tag">피할 색: {{46.불운색}}</span></div>
+  <h3>방향·공간 개운법</h3><p>{{46.방향개운법설명}}</p>
+  <div class="info-box"><div class="info-box-title">✦ 행운의 방향</div><p>{{46.행운방향}} 방향이 {{47.name}}님에게 가장 좋은 에너지를 가져다줍니다. {{46.행운방향상세설명}}</p></div>
+  <h3>음식·식이 개운법</h3><p>{{46.음식개운법설명}}</p>
+  <div class="two-col">
+    <div class="info-box"><div class="info-box-title">✦ 추천 음식</div><ul class="checklist"><li>{{46.추천음식1}}</li><li>{{46.추천음식2}}</li><li>{{46.추천음식3}}</li></ul></div>
+    <div class="info-box"><div class="info-box-title">✦ 피할 음식</div><ul class="checklist"><li>{{46.피할음식1}}</li><li>{{46.피할음식2}}</li><li>{{46.피할음식3}}</li></ul></div>
+  </div>
+  <h3>생활 습관 개운법</h3>
+  <ul class="checklist"><li>{{46.생활개운1}}</li><li>{{46.생활개운2}}</li><li>{{46.생활개운3}}</li><li>{{46.생활개운4}}</li><li>{{46.생활개운5}}</li></ul>
+  <div class="highlight-box"><p><strong>지금 당장 시작할 수 있는 한 가지:</strong><br>{{46.즉시실천개운법}}</p></div>
+  <div class="page-footer"><span>나만의 운명 활용법</span><span>135</span></div>
+</div>
+
+<!-- 마지막 페이지 -->
+<div class="page">
+  <div class="section-cover" style="background: var(--bg-soft);">
+    <div style="font-family:'Noto Sans KR',sans-serif; font-size:9pt; color:var(--gold); letter-spacing:4px; margin-bottom:24px;">나만의 운명 활용법</div>
+    <div style="font-size:28pt; font-weight:900; color:var(--accent); margin-bottom:16px; line-height:1.3;">{{47.name}} 님의<br>이기는 인생이<br>시작됩니다.</div>
+    <div style="width:60px; height:2px; background:var(--gold); margin:24px auto;"></div>
+    <div style="font-family:'Noto Sans KR',sans-serif; font-size:10pt; color:var(--text-light); max-width:300px; line-height:1.9;">운명은 믿는 것이 아니라,<br>이용하는 것입니다.</div>
+    <div style="margin-top:48px; font-family:'Noto Sans KR',sans-serif; font-size:9pt; color:#aaa;">{{46.상호명}} · {{46.연락처}}</div>
+  </div>
+</div>
+
+<!-- =============================================
+  한글 → 한자 자동 변환 스크립트
+  Make에서 한글로 값이 오면 자동으로 한자 병기
+  ============================================= -->
+<script>
+(function() {
+  // 천간 매핑 (한글 → 한자)
+  const 천간Map = {
+    '갑':'甲','을':'乙','병':'丙','정':'丁','무':'戊',
+    '기':'己','경':'庚','신':'辛','임':'壬','계':'癸'
+  };
+  // 지지 매핑 (한글 → 한자)
+  const 지지Map = {
+    '자':'子','축':'丑','인':'寅','묘':'卯','진':'辰','사':'巳',
+    '오':'午','미':'未','신':'申','유':'酉','술':'戌','해':'亥'
+  };
+  // 오행 → CSS 클래스 매핑
+  const 오행Class = {
+    '목':'el-wood','화':'el-fire','토':'el-earth','금':'el-metal','수':'el-water'
+  };
+
+  // 한글+한자 병기 HTML 생성
+  function makeGlyph(hangul, map) {
+    const key = hangul.trim().charAt(0);
+    const hanja = map[key];
+    if (hanja) {
+      return hangul + '<span class="hanja">' + hanja + '</span>';
+    }
+    // 이미 한자로 온 경우 그대로 표시
+    return hangul;
+  }
+
+  // 오행 클래스 적용
+  function applyElClass(el, 오행text) {
+    const key = 오행text.trim().charAt(0);
+    const cls = 오행Class[key];
+    if (cls) {
+      el.className = 'pillar-element ' + cls;
+    }
+  }
+
+  // 천간/지지 데이터 → id 매핑
+  const pillars = [
+    // [천간id, 천간값, 지지id, 지지값, 천간오행id, 지지오행id]
+    { mainId:'si-chun',    val:'{{46.시천간}}',   jiId:'si-ji',    jiVal:'{{46.시지지}}',   elId:'si-chun-el',   jiElId:'si-ji-el',   elVal:'{{46.시천간오행}}', jiElVal:'{{46.시지지오행}}' },
+    { mainId:'il-chun',    val:'{{46.일천간}}',   jiId:'il-ji',    jiVal:'{{46.일지지}}',   elId:'il-chun-el',   jiElId:'il-ji-el',   elVal:'{{46.일천간오행}}', jiElVal:'{{46.일지지오행}}' },
+    { mainId:'wol-chun',   val:'{{46.월천간}}',   jiId:'wol-ji',   jiVal:'{{46.월지지}}',   elId:'wol-chun-el',  jiElId:'wol-ji-el',  elVal:'{{46.월천간오행}}', jiElVal:'{{46.월지지오행}}' },
+    { mainId:'nyeon-chun', val:'{{46.년천간}}',   jiId:'nyeon-ji', jiVal:'{{46.년지지}}',   elId:'nyeon-chun-el',jiElId:'nyeon-ji-el',elVal:'{{46.년천간오행}}', jiElVal:'{{46.년지지오행}}' }
+  ];
+
+  pillars.forEach(function(p) {
+    // 천간 병기
+    var chunEl = document.getElementById(p.mainId);
+    if (chunEl) chunEl.innerHTML = makeGlyph(p.val, 천간Map);
+
+    // 지지 병기
+    var jiEl = document.getElementById(p.jiId);
+    if (jiEl) jiEl.innerHTML = makeGlyph(p.jiVal, 지지Map);
+
+    // 천간 오행 클래스
+    var chunElBadge = document.getElementById(p.elId);
+    if (chunElBadge) applyElClass(chunElBadge, p.elVal);
+
+    // 지지 오행 클래스
+    var jiElBadge = document.getElementById(p.jiElId);
+    if (jiElBadge) applyElClass(jiElBadge, p.jiElVal);
+  });
+
+  // 일간 텍스트 (본문용)
+  var ilganDisplay = document.getElementById('ilgan-display');
+  if (ilganDisplay) {
+    var ilganVal = '{{46.일천간}}';
+    var key = ilganVal.trim().charAt(0);
+    var hanja = 천간Map[key];
+    ilganDisplay.innerHTML = hanja ? (ilganVal + '(' + hanja + ')') : ilganVal;
+  }
+})();
+</script>
+
+</body>
+</html>
